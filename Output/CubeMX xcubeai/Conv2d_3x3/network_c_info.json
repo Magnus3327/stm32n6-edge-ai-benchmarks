@@ -1,0 +1,64 @@
+{
+  "aton_execution_time": [
+    {
+      "counters": [
+        8412,
+        106920,
+        2599
+      ],
+      "cycles": 117932,
+      "cycles_by_macc": 0,
+      "duration_ms": 0.1474153771996498,
+      "percentage": 100.0
+    }
+  ],
+  "environment": {
+    "device": "stm32 family - 0x486 - STM32N6xx @800/400MHz",
+    "generated_model": {
+      "generated_time": "2026-05-30T12:07:19+0200",
+      "name": "network"
+    },
+    "network_signature": "0x487be153c81241e8",
+    "test_name": "",
+    "tools": [
+      {
+        "arguments": "validate --target stm32n6 --name network -m /Users/matteo/Universita/Tirocinio/Baseline Performance/Modelli/Modelli/baseline_conv2d_3x3_int8.tflite --st-neural-art n6-extflash@/Users/matteo/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/scripts/N6_scripts/user_neuralart.json --workspace /var/folders/qn/y4fdcgw97jsbxdyb6s0d79680000gn/T/mxAI_workspace1849489262954110416146020461383843 --output /Users/matteo/.stm32cubemx/network_output --mode target --desc serial:921600",
+        "environment": [
+          "STATS_TYPE=X-CUBE-AI"
+        ],
+        "input_model": {
+          "model_files": [
+            {
+              "name": "baseline_conv2d_3x3_int8.tflite",
+              "signature": "0x722857119af2b68383d2fd0d1c16f1d4"
+            }
+          ],
+          "n_params": 896,
+          "name": "baseline_conv2d_3x3_int8",
+          "size": 992,
+          "type": "tflite"
+        },
+        "name": "ST.EdgeAI.Core",
+        "version": "2.2.0-20266 2adc00962"
+      }
+    ]
+  },
+  "json_schema_version": "2.0",
+  "validation": {
+    "val_error": 6.29302958259359e-05,
+    "val_error_desc": "x-cross (rmse) #1",
+    "val_metrics": [
+      {
+        "acc": "n.a.",
+        "cos": 0.9999997615814209,
+        "desc": "X-cross #1",
+        "l2r": 0.0006673012976534665,
+        "mae": 8.617085768491961e-06,
+        "mean": 2.8724084586428944e-06,
+        "nse": 0.9999394961381454,
+        "rmse": 6.29302958259359e-05,
+        "std": 6.296316860243678e-05
+      }
+    ]
+  }
+}

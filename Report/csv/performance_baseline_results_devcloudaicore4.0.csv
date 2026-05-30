@@ -1,0 +1,9 @@
+Model Name,Layer Type,Filters,Kernel Size,Input Shape,Quantization,MACC,Inference Time (ms),CPU Fallback (%),NPU Allocation (%),RAM Usage (KiB),Flash Usage (KiB),Notes
+baseline_conv2d_3x3_int8,Conv2D,32,3x3,64x64x3,INT8,3604480,0.155,0,100,12.03,0.97,"1 single hardware epoch"
+baseline_depthwise_3x3_int8,DepthwiseConv2D,3,3x3,64x64x3,INT8,337920,0.031,0,100,12.00,0.13,"1 single hardware epoch"
+baseline_conv2d_1x1_int8,Conv2D (Pointwise),32,1x1,64x64x3,INT8,458752,0.288,0,100,140.00,0.22,"Split into 2 hardware epochs"
+baseline_conv2d_pool_int8,Conv2D + MaxPool,16,3x3,64x64x3,INT8,1802240,0.088,0,100,12.02,0.48,"1 single hardware epoch (Operator Fusion)"
+baseline_conv2d_16f_3x3_int8,Conv2D,16,3x3,64x64x3,INT8,1802240,0.086,0,100,12.02,0.48,"1 single hardware epoch"
+baseline_conv2d_64f_3x3_int8,Conv2D,64,3x3,64x64x3,INT8,7208960,0.291,0,100,12.06,1.94,"1 single hardware epoch"
+baseline_conv2d_32f_5x5_int8,Conv2D,32,5x5,64x64x3,INT8,9961472,0.161,0,100,12.03,2.47,"1 single hardware epoch"
+baseline_conv2d_32f_7x7_int8,Conv2D,32,7x7,64x64x3,INT8,19660800,FAIL,N/A,N/A,1548.00,4.72,"HW Timeout (1.5MB RAM saturation. Fails even with Epoch Controller)"

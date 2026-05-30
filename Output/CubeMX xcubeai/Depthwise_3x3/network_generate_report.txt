@@ -1,0 +1,89 @@
+ST Edge AI Core v2.2.0-20266 2adc00962
+Created date          : 2026-05-30 12:20:58
+Parameters            : generate --target stm32n6 --name network -m /Users/matteo/Universita/Tirocinio/Baseline Performance/Modelli/Modelli/baseline_depthwise_3x3_int8.tflite --st-neural-art n6-extflash@/Users/matteo/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/scripts/N6_scripts/user_neuralart.json --workspace /var/folders/qn/y4fdcgw97jsbxdyb6s0d79680000gn/T/mxAI_workspace193109171797504907872055480557580 --output /Users/matteo/.stm32cubemx/network_output
+
+Model name - baseline_depthwise_3x3_int8
+------ ----------------------------------- --------------------- ------------ --------- -------------------------------- 
+m_id   layer (original)                    oshape                param/size        macc                     connected to 
+------ ----------------------------------- --------------------- ------------ --------- -------------------------------- 
+0      serving_default_ke.._tensor_30 ()   [b:1,h:64,w:64,c:3]                                                           
+       conv2d_0 (DEPTHWISE_CONV_2D)        [b:1,h:64,w:64,c:3]   30/39          110,595   serving_default_ke.._tensor_30 
+       nl_0_nl (DEPTHWISE_CONV_2D)         [b:1,h:64,w:64,c:3]                   12,288                         conv2d_0 
+------ ----------------------------------- --------------------- ------------ --------- -------------------------------- 
+1      pool_1 (MEAN)                       [b:1,h:1,w:1,c:3]                     12,288                          nl_0_nl 
+       reshape_1_reshape (MEAN)            [b:1,c:3]                                                              pool_1 
+------ ----------------------------------- --------------------- ------------ --------- -------------------------------- 
+model: macc=135,171 weights=39 activations=-- io=--
+
+
+
+
+
+Compilation details
+------------------------------------------------------------------------------------
+Compiler version: 1.1.1-14
+Compiler arguments:  -i /Users/matteo/.stm32cubemx/network_output/baseline_depthwise_3x3_int8_OE_3_3_0.onnx --json-quant-file /Users/matteo/.stm32cubemx/network_output/baseline_depthwise_3x3_int8_OE_3_3_0_Q.json -g network.c --load-mdesc /Users/matteo/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/Utilities/configs/stm32n6.mdesc --load-mpool /Users/matteo/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/scripts/N6_scripts/my_mpools/stm32n6__extFlash.mpool --save-mpool-file /private/var/folders/qn/y4fdcgw97jsbxdyb6s0d79680000gn/T/mxAI_workspace193109171797504907872055480557580/neural_art__network/stm32n6__extFlash.mpool --out-dir-prefix /private/var/folders/qn/y4fdcgw97jsbxdyb6s0d79680000gn/T/mxAI_workspace193109171797504907872055480557580/neural_art__network/ --optimization 3 --all-buffers-info --mvei --cache-maintenance --Oauto-sched --native-float --enable-virtual-mem-pools --Omax-ca-pipe 4 --Ocache-opt --Os --output-info-file c_info.json
+====================================================================================
+
+Memory usage information  (input/output buffers are included in activations)
+------------------------------------------------------------------------------------
+	flexMEM    [0x34000000 - 0x34000000]:          0  B /          0  B  (  0.00 % used) -- weights:          0  B (  0.00 % used)  activations:          0  B (  0.00 % used)
+	cpuRAM1    [0x34064000 - 0x34064000]:          0  B /          0  B  (  0.00 % used) -- weights:          0  B (  0.00 % used)  activations:          0  B (  0.00 % used)
+	cpuRAM2    [0x34100000 - 0x34200000]:          0  B /      1.000 MB  (  0.00 % used) -- weights:          0  B (  0.00 % used)  activations:          0  B (  0.00 % used)
+	npuRAM3    [0x34200000 - 0x34270000]:          0  B /    448.000 kB  (  0.00 % used) -- weights:          0  B (  0.00 % used)  activations:          0  B (  0.00 % used)
+	npuRAM4    [0x34270000 - 0x342E0000]:          0  B /    448.000 kB  (  0.00 % used) -- weights:          0  B (  0.00 % used)  activations:          0  B (  0.00 % used)
+	npuRAM5    [0x342E0000 - 0x34350000]:     24.000 kB /    448.000 kB  (  5.36 % used) -- weights:          0  B (  0.00 % used)  activations:     24.000 kB (  5.36 % used)
+	npuRAM6    [0x34350000 - 0x343C0000]:          0  B /    448.000 kB  (  0.00 % used) -- weights:          0  B (  0.00 % used)  activations:          0  B (  0.00 % used)
+	octoFlash  [0x71000000 - 0x78000000]:         65  B /    112.000 MB  (  0.00 % used) -- weights:         65  B (  0.00 % used)  activations:          0  B (  0.00 % used)
+	hyperRAM   [0x90000000 - 0x90000000]:          0  B /          0  B  (  0.00 % used) -- weights:          0  B (  0.00 % used)  activations:          0  B (  0.00 % used)
+---
+Total:                                            24.063 kB                                  -- weights:         65  B                  activations:     24.000 kB                   
+====================================================================================
+
+
+Used memory ranges
+------------------------------------------------------------------------------------
+	npuRAM5    [0x342E0000 - 0x34350000]: 0x342E0000-0x342E6000
+	octoFlash  [0x71000000 - 0x78000000]: 0x71000000-0x71000050
+====================================================================================
+
+Epochs details
+------------------------------------------------------------------------------------
+Total number of epochs: 3 of which 0 implemented in software
+---
+epoch ID   HW/SW/EC Operation (SW only)
+epoch 1       HW    
+epoch 2       HW    
+epoch 3       HW    
+==================================================================================== 
+ Requested memory size by section - "stm32n6npu" target
+ ------------------------------- ------- -------- ------ -------- 
+ module                             text   rodata   data      bss 
+ ------------------------------- ------- -------- ------ -------- 
+ network.o                           312    2,188      0        0 
+ ll_aton_reloc_network.o               0        0      0        0 
+ NetworkRuntime1020_CM55_GCC.a         0        0      0        0 
+ lib (toolchain)*                      0        0      0        0 
+ ll atonn runtime                  6,222    6,442      0       29 
+ ------------------------------- ------- -------- ------ -------- 
+ RT total**                        6,534    8,630      0       29 
+ ------------------------------- ------- -------- ------ -------- 
+ weights                               0       65      0        0 
+ activations                           0        0      0   24,576 
+ io                                    0        0      0        0 
+ ------------------------------- ------- -------- ------ -------- 
+ TOTAL                             6,534    8,695      0   24,605 
+ ------------------------------- ------- -------- ------ -------- 
+ *  toolchain objects (libm/libgcc*)
+ ** RT AI runtime objects (kernels+infrastructure)
+  
+  Summary - "stm32n6npu" target
+  --------------------------------------------------
+               FLASH (ro)      %*   RAM (rw)      % 
+  --------------------------------------------------
+  RT total         15,164   99.6%         29   0.1% 
+  --------------------------------------------------
+  TOTAL            15,229             24,605        
+  --------------------------------------------------
+  *  rt/total
+

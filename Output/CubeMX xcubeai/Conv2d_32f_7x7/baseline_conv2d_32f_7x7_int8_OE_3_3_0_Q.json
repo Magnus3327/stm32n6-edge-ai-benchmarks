@@ -1,0 +1,450 @@
+{
+    "version": "4.0",
+    "environment": {
+        "generated_model": {
+            "model_files": [
+                {
+                    "name": "baseline_conv2d_32f_7x7_int8_OE_3_3_0.onnx",
+                    "signature": "0x258f48ed661fbf361d2e8a1c6529dfbf"
+                }
+            ],
+            "name": "network",
+            "generated_time": "2026-05-30T12:15:26+0200"
+        },
+        "tools": [
+            {
+                "name": "ST.EdgeAI.Core",
+                "version": "2.2.0-20266 2adc00962",
+                "arguments": "generate --target stm32n6 --name network -m /Users/matteo/Universita/Tirocinio/Baseline Performance/Modelli/Modelli/baseline_conv2d_32f_7x7_int8.tflite --st-neural-art n6-extflash@/Users/matteo/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/scripts/N6_scripts/user_neuralart.json --workspace /var/folders/qn/y4fdcgw97jsbxdyb6s0d79680000gn/T/mxAI_workspace189819245585419438927903878028263 --output /Users/matteo/.stm32cubemx/network_output",
+                "environment": [
+                    "STATS_TYPE=X-CUBE-AI"
+                ],
+                "input_model": {
+                    "model_files": [
+                        {
+                            "name": "baseline_conv2d_32f_7x7_int8.tflite",
+                            "signature": "0x9bb68b7c81a6e005e0d86cedbcb65bb0"
+                        }
+                    ],
+                    "name": "baseline_conv2d_32f_7x7_int8",
+                    "type": "tflite",
+                    "size": 4832,
+                    "n_params": 4736
+                }
+            }
+        ],
+        "test_name": "",
+        "network_signature": "0x95efa69babc51dbc"
+    },
+    "model_info": {
+        "original_inputs": [
+            {
+                "name": "serving_default_keras_tensor_220",
+                "data_format": {
+                    "type": "SIGNED",
+                    "size": 8,
+                    "scale": [
+                        0.007843121886253357
+                    ],
+                    "zero": [
+                        0
+                    ],
+                    "quantizer": "UNIFORM"
+                },
+                "shape": [
+                    1,
+                    64,
+                    64,
+                    3
+                ],
+                "shape_map": [
+                    "BATCH",
+                    "H",
+                    "W",
+                    "CH"
+                ],
+                "c_shape_map": [
+                    "BATCH",
+                    "H",
+                    "W",
+                    "CH"
+                ]
+            }
+        ],
+        "original_outputs": [
+            {
+                "name": "reshape_1_reshape",
+                "data_format": {
+                    "type": "SIGNED",
+                    "size": 8,
+                    "scale": [
+                        0.0004240265698172152
+                    ],
+                    "zero": [
+                        -128
+                    ],
+                    "quantizer": "UNIFORM"
+                },
+                "shape": [
+                    1,
+                    32
+                ],
+                "shape_map": [
+                    "BATCH",
+                    "CH"
+                ],
+                "c_shape_map": [
+                    "BATCH",
+                    "CH"
+                ]
+            }
+        ]
+    },
+    "tensors": {
+        "Input_0_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.007843121886253357
+                    ],
+                    [
+                        0
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            },
+            "data_channel_position": "CHLAST",
+            "data_channel_batch": 1,
+            "user_allocated": false
+        },
+        "Transpose_1_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.007843121886253357
+                    ],
+                    [
+                        0
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "Dequantize_2_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.007843121886253357
+                    ],
+                    [
+                        0
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "Conv2D_3_weights": {
+            "format": {
+                "params": [
+                    [
+                        0.0004629561444744468,
+                        0.00045701704220846295,
+                        0.0004654309886973351,
+                        0.0004640841798391193,
+                        0.00046342716086655855,
+                        0.0004581354442052543,
+                        0.00046560491318814456,
+                        0.0004652489733416587,
+                        0.00046533974818885326,
+                        0.0004610330215655267,
+                        0.00046336479135788977,
+                        0.00046472891699522734,
+                        0.00045884313294664025,
+                        0.0004652074712794274,
+                        0.0004650383780244738,
+                        0.0004650491173379123,
+                        0.0004617531376425177,
+                        0.0004625945002771914,
+                        0.0004651257477235049,
+                        0.00046408240450546145,
+                        0.00046185351675376296,
+                        0.0004606095317285508,
+                        0.00046429361100308597,
+                        0.0004639284161385149,
+                        0.00046503060730174184,
+                        0.0004596509097609669,
+                        0.00046304595889523625,
+                        0.000464910437585786,
+                        0.0004642008861992508,
+                        0.0004644886066671461,
+                        0.0004569450975395739,
+                        0.00046360891428776085
+                    ],
+                    [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "Conv2D_3_bias": {
+            "format": {
+                "params": [
+                    [
+                        3.6310213999968255e-06,
+                        3.5844402646034723e-06,
+                        3.6504320632957388e-06,
+                        3.639868737081997e-06,
+                        3.634715767475427e-06,
+                        3.5932121136283968e-06,
+                        3.6517960779747227e-06,
+                        3.6490043839876307e-06,
+                        3.6497162909654435e-06,
+                        3.615938112488948e-06,
+                        3.6342264593258733e-06,
+                        3.6449255276238546e-06,
+                        3.5987625324196415e-06,
+                        3.6486790122580715e-06,
+                        3.647352741609211e-06,
+                        3.647436869869125e-06,
+                        3.6215860745869577e-06,
+                        3.6281851407693466e-06,
+                        3.6480378184933215e-06,
+                        3.639854867287795e-06,
+                        3.6223734696250176e-06,
+                        3.612616637838073e-06,
+                        3.641511284513399e-06,
+                        3.6386470583238406e-06,
+                        3.6472918054641923e-06,
+                        3.6050980725121917e-06,
+                        3.6317258036433486e-06,
+                        3.64634934157948e-06,
+                        3.6407841434993315e-06,
+                        3.6430408272281056e-06,
+                        3.5838761505146977e-06,
+                        3.6361411730467808e-06
+                    ],
+                    [
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0
+                    ]
+                ],
+                "class": "integer",
+                "type": "S32"
+            }
+        },
+        "Conv2D_3_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.005046415142714977
+                    ],
+                    [
+                        -128
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "Quantize_4_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.005046415142714977
+                    ],
+                    [
+                        -128
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "Dequantize_5_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.005046415142714977
+                    ],
+                    [
+                        -128
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "Relu_6_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.005046415142714977
+                    ],
+                    [
+                        -128
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "AveragePool_7_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.0004240265698172152
+                    ],
+                    [
+                        -128
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "Reshape_8_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.0004240265698172152
+                    ],
+                    [
+                        -128
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            }
+        },
+        "Quantize_9_out_0": {
+            "format": {
+                "params": [
+                    [
+                        0.0004240265698172152
+                    ],
+                    [
+                        -128
+                    ]
+                ],
+                "class": "integer",
+                "type": "S8"
+            },
+            "data_channel_position": "CHFIRST",
+            "data_channel_batch": 1,
+            "user_allocated": false
+        }
+    },
+    "nodes": {
+        "Transpose_1": {
+            "names": [
+                "__FE_GENERATED__"
+            ]
+        },
+        "Dequantize_2": {
+            "names": [
+                "__FE_GENERATED__"
+            ]
+        },
+        "Conv2D_3": {
+            "names": [
+                "CONV_2D_0"
+            ]
+        },
+        "Quantize_4": {
+            "names": [
+                "__FE_GENERATED__"
+            ]
+        },
+        "Dequantize_5": {
+            "names": [
+                "__FE_GENERATED__"
+            ]
+        },
+        "Relu_6": {
+            "names": [
+                "__FE_GENERATED__"
+            ]
+        },
+        "AveragePool_7": {
+            "names": [
+                "MEAN_1"
+            ]
+        },
+        "Reshape_8": {
+            "names": [
+                "__FE_GENERATED__"
+            ]
+        },
+        "Quantize_9": {
+            "names": [
+                "__FE_GENERATED__"
+            ]
+        }
+    }
+}
