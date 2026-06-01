@@ -1,2 +1,9 @@
 Model Name,Layer Type,Filters,Kernel Size,Input Shape,Quantization,MACC,Inference Time (ms),CPU Fallback (%),NPU Allocation (%),RAM Usage (KiB),Flash Usage (KiB),Notes
-baseline_conv2d_1x1_int8,Conv2D (Pointwise),32,1x1,64x64x3,INT8,655392,0.153,0,100,12.03,0.22,"1 single hardware epoch"
+baseline_conv2d_16f_3x3_int8,Conv2D,16,3x3,64x64x3,INT8,1835024,0.087,0,100,77.20,0.48,1 single hardware epoch
+baseline_conv2d_1x1_int8,Conv2D (Pointwise),32,1x1,64x64x3,INT8,524320,0.153,0,100,130.34,0.22,1 single hardware epoch
+baseline_conv2d_32f_5x5_int8,Conv2D,32,5x5,64x64x3,INT8,9961504,0.161,0,100,145.47,2.47,1 single hardware epoch
+baseline_conv2d_32f_7x7_int8,Conv2D,32,7x7,64x64x3,INT8,19398688,0.473,0,100,146.06,4.72,Split into 4 hardware epochs
+baseline_conv2d_3x3_int8,Conv2D,32,3x3,64x64x3,INT8,3670048,0.155,0,100,142.28,0.97,1 single hardware epoch
+baseline_conv2d_64f_3x3_int8,Conv2D,64,3x3,64x64x3,INT8,7340096,0.291,0,100,272.44,1.94,1 single hardware epoch
+baseline_conv2d_poll_int8,Conv2D + MaxPool,16,3x3,64x64x3,INT8,1851408,0.087,0,100,20.22,0.48,1 single hardware epoch
+baseline_depthwise_3x3_int8,DepthwiseConv2D,3,3x3,64x64x3,INT8,122883,0.050,0,100,13.07,0.04,Split into 2 hardware epochs
