@@ -9,7 +9,7 @@ The project focuses on the optimization and performance evaluation of deep learn
 Specifically, this repository compares:
 - **Actual Hardware Measurements (Baseline)** vs. **Static Compiler Predictions (Estimated)**.
 - Two compiler generations from STMicroelectronics: **AI Core v2.2** (via STM32CubeMX / X-CUBE-AI) and **AI Core v4.0** (via STM32 AI Studio).
-- Two execution platforms: the local physical **STM32N6 Nucleo** board and the **STM32N6 Discovery Kit (DK)** board accessed via **ST DevCloud**.
+- Two execution platforms: the local physical **STM32N6 Nucleo** board and the **STM32N6 Discovery Kit (DK)** board accessed via **ST Developer Cloud**.
 
 ## Repository Structure
 
@@ -60,3 +60,6 @@ To regenerate the Jupyter Notebook and compile the HTML and PDF reports, follow 
    ```bash
    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless --no-sandbox --print-to-pdf="Report/NPU_Performance_Analysis.pdf" "Report/NPU_Performance_Analysis.html"
    ```
+
+---
+**Author:** Matteo Miglio (Student ID / Matricola: 243947)
