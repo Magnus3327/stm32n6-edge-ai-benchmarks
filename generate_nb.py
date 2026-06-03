@@ -564,10 +564,10 @@ plt.show()""")
     
     # Save the notebook to the Report folder
     os.makedirs('Report', exist_ok=True)
-    with open('Report/NPU_Performance_Analysis_Updated.ipynb', 'w', encoding='utf-8') as f:
+    with open('Report/NPU_Performance_Analysis.ipynb', 'w', encoding='utf-8') as f:
         nbf.write(nb, f)
         
-    print("Notebook 'Report/NPU_Performance_Analysis_Updated.ipynb' generated successfully!")
+    print("Notebook 'Report/NPU_Performance_Analysis.ipynb' generated successfully!")
 
 if __name__ == '__main__':
     create_notebook()
