@@ -1,2 +1,0 @@
-Model Name,Layer Type,Filters,Kernel Size,Input Shape,Quantization,MACC,Inference Time (ms),CPU Fallback (%),NPU Allocation (%),RAM Usage (KiB),Flash Usage (KiB),Notes
-baseline_conv2d_1x1_int8,Conv2D (Pointwise),32,1x1,64x64x3,INT8,655392,0.146,0,100,12.03,0.22,"1 single hardware epoch"

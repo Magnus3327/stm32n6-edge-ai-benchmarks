@@ -1,0 +1,9 @@
+Model Name,Quantization,Estimated MACC,Estimated RAM Usage (KiB),Estimated Flash Usage (KiB),Estimated Epochs
+baseline_conv2d_16f_3x3_int8,INT8,1802240,12.02,0.48,N/A
+baseline_conv2d_1x1_int8,INT8,458752,140.00,0.22,N/A
+baseline_conv2d_32f_5x5_int8,INT8,9961472,12.03,2.47,N/A
+baseline_conv2d_32f_7x7_int8,INT8,19660800,1546.24,4.72,N/A
+baseline_conv2d_3x3_int8,INT8,3604480,12.03,0.97,N/A
+baseline_conv2d_64f_3x3_int8,INT8,7208960,12.06,1.94,N/A
+baseline_conv2d_poll_int8,INT8,1802240,12.02,0.48,N/A
+baseline_depthwise_3x3_int8,INT8,337920,12.00,0.13,N/A
