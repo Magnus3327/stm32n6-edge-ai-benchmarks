@@ -1,0 +1,8 @@
+2026-06-16 21:30:05,481 [INFO] CmdLine:76 - ST Edge AI Core v2.2.0-20266 2adc00962
+2026-06-16 21:30:17,937 [INFO] CmdLine:76 - WARNING: Unsupported keys in the current profile n6-extflash are ignored: memory_desc
+2026-06-16 21:30:17,937 [INFO] CmdLine:76 - 	> memory_desc is not a valid key anymore, use machine_desc instead
+2026-06-16 21:30:29,929 [INFO] CmdLine:76 -                                             
+2026-06-16 21:30:29,930 [INFO] CmdLine:76 - INTERNAL ERROR: Your model ir_version 10 is higher than the checker's (9).
+2026-06-16 21:30:30,215 [INFO] CmdLine:148 - stedgeai exit with status: 255
+2026-06-16 21:30:30,215 [ERROR] CmdLine:151 - stedgeai return with an error
+2026-06-16 21:30:30,215 [INFO] AInterface:635 - PINNR file not found at: /var/folders/qn/y4fdcgw97jsbxdyb6s0d79680000gn/T/mxAI_workspace98166206581253952614700186115665/network_report.json
