@@ -1,0 +1,4 @@
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-5 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-5\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: Model does not fit in Board. RAM Size too low
