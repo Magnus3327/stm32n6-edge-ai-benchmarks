@@ -20,3 +20,7 @@ __pycache__/
 # Temporary files or output plots if you don't want to track them (optional, uncomment to activate)
 # Report/plot/
 # Output/plot/
+
+# Exported Models
+Models/exported/
+Models/.cache

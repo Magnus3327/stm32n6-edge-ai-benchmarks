@@ -1,0 +1,35 @@
+# =============================================================
+# Dipendenze per download_and_export_models.py
+# =============================================================
+# Installare in un venv:
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements_export.txt
+# =============================================================
+
+# --- Core (necessarie per tutti i modelli) ---
+torch>=2.0
+torchvision>=0.15
+onnx>=1.14
+
+# --- YOLO v8/v11 ---
+ultralytics>=8.2
+
+# --- Per verificare i modelli ONNX ---
+onnxruntime>=1.15
+
+# --- PIDNet-S: download pesi da Google Drive ---
+gdown
+
+# --- UniFormer: via timm ---
+timm>=1.0
+
+# --- MobileCLIP ---
+# Richiede installazione separata dal repo Apple:
+#   pip install git+https://github.com/apple/ml-mobileclip.git
+
+# --- RTMDet-l (opzionale, ecosistema OpenMMLab) ---
+# pip install -U openmim
+# mim install mmengine mmcv mmdet
+
+# --- FastInst-D1 (opzionale, ecosistema Detectron2) ---
+# pip install 'git+https://github.com/facebookresearch/detectron2.git'
