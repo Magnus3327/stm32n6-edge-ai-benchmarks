@@ -127,13 +127,16 @@ h1.slide-main-title {
   font-size: 36px;
   font-weight: 800;
   line-height: 1.15;
-  display: inline-block;
+  width: fit-content; /* Sostituisce display: inline-block per evitare il bug */
   background: linear-gradient(135deg, #ffffff 30%, var(--cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  -webkit-box-decoration-break: clone; /* Forza il ricalcolo del gradiente su ogni singola riga */
+  box-decoration-break: clone;
 }
+
 h2.section-heading {
   font-size: 21px;
   font-weight: 700;
