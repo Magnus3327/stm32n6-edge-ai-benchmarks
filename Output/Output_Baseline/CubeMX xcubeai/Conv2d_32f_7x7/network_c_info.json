@@ -1,0 +1,97 @@
+{
+  "aton_execution_time": [
+    {
+      "counters": [
+        10745,
+        114021,
+        4984
+      ],
+      "cycles": 129752,
+      "cycles_by_macc": 0,
+      "duration_ms": 0.1621902510523796,
+      "percentage": 35.10041699125733
+    },
+    {
+      "counters": [
+        8365,
+        106483,
+        3673
+      ],
+      "cycles": 118522,
+      "cycles_by_macc": 0,
+      "duration_ms": 0.14815299808979035,
+      "percentage": 32.06254369615082
+    },
+    {
+      "counters": [
+        8688,
+        105855,
+        2821
+      ],
+      "cycles": 117365,
+      "cycles_by_macc": 0,
+      "duration_ms": 0.14670724868774415,
+      "percentage": 31.749661716208056
+    },
+    {
+      "counters": [
+        2252,
+        775,
+        992
+      ],
+      "cycles": 4019,
+      "cycles_by_macc": 0,
+      "duration_ms": 0.005024500004947185,
+      "percentage": 1.0873775963837946
+    }
+  ],
+  "environment": {
+    "device": "stm32 family - 0x486 - STM32N6xx @800/400MHz",
+    "generated_model": {
+      "generated_time": "2026-05-30T12:15:43+0200",
+      "name": "network"
+    },
+    "network_signature": "0x947d14846094e017",
+    "test_name": "",
+    "tools": [
+      {
+        "arguments": "validate --target stm32n6 --name network -m /Users/matteo/Universita/Tirocinio/Baseline Performance/Modelli/Modelli/baseline_conv2d_32f_7x7_int8.tflite --st-neural-art n6-extflash@/Users/matteo/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/scripts/N6_scripts/user_neuralart.json --workspace /var/folders/qn/y4fdcgw97jsbxdyb6s0d79680000gn/T/mxAI_workspace1899869361783317769634495828642708 --output /Users/matteo/.stm32cubemx/network_output --mode target --desc serial:921600",
+        "environment": [
+          "STATS_TYPE=X-CUBE-AI"
+        ],
+        "input_model": {
+          "model_files": [
+            {
+              "name": "baseline_conv2d_32f_7x7_int8.tflite",
+              "signature": "0x9bb68b7c81a6e005e0d86cedbcb65bb0"
+            }
+          ],
+          "n_params": 4736,
+          "name": "baseline_conv2d_32f_7x7_int8",
+          "size": 4832,
+          "type": "tflite"
+        },
+        "name": "ST.EdgeAI.Core",
+        "version": "2.2.0-20266 2adc00962"
+      }
+    ]
+  },
+  "json_schema_version": "2.0",
+  "validation": {
+    "val_error": 7.495817408198491e-05,
+    "val_error_desc": "x-cross (rmse) #1",
+    "val_metrics": [
+      {
+        "acc": "n.a.",
+        "cos": 0.9999996423721313,
+        "desc": "X-cross #1",
+        "l2r": 0.0007990480517037213,
+        "mae": 1.3250857591629028e-05,
+        "mean": 1.0600686437101103e-05,
+        "nse": 0.9996899106442209,
+        "rmse": 7.495817408198491e-05,
+        "std": 7.432102574966848e-05
+      }
+    ]
+  }
+}

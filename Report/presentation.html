@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>NPU Performance Benchmark — STM32N657</title>
+<style>
+/* ── Google Fonts ─────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ── PDF page setup ───────────────────────────────────── */
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
+/* ── Reset ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+/* ── Slide wrapper ────────────────────────────────────── */
+.slide {
+  width: 297mm;
+  min-height: 210mm;
+  height: 210mm;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  break-after: page;
+  page-break-after: always;
+  background: #0d1117;
+}
+
+/* ── Colour tokens ────────────────────────────────────── */
+:root {
+  --blue:    #2f80ed;
+  --green:   #27ae60;
+  --orange:  #e67e22;
+  --pink:    #cc79a7;
+  --cyan:    #58c4dc;
+  --yellow:  #f1c40f;
+  --red:     #e74c3c;
+  --surface: #161b22;
+  --surface2:#21262d;
+  --border:  #30363d;
+  --text1:   #e6edf3;
+  --text2:   #8b949e;
+  --text3:   #c9d1d9;
+}
+
+/* ── Gradient accent bar ──────────────────────────────── */
+.accent-bar {
+  height: 5px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan), var(--green));
+  flex-shrink: 0;
+}
+
+/* ── Slide header ─────────────────────────────────────── */
+.slide-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 32px 10px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  background: var(--surface);
+}
+.slide-header .logo-area {
+  display: flex; align-items: center; gap: 10px;
+}
+.slide-header .chip-badge {
+  background: linear-gradient(135deg, var(--blue), var(--cyan));
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+.slide-header .slide-title-top {
+  font-size: 11px;
+  color: var(--text2);
+  font-weight: 500;
+  text-align: right;
+}
+.slide-header .section-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.slide-num { font-size: 10px; color: var(--text2); }
+
+/* ── Slide body ───────────────────────────────────────── */
+.slide-body {
+  flex: 1;
+  padding: 18px 32px 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Typography ───────────────────────────────────────── */
+h1.slide-main-title {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ffffff 30%, var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+h2.section-heading {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--text1);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+h2.section-heading .ico { font-size: 20px; }
+h3 { font-size: 13px; font-weight: 600; color: var(--cyan); margin-bottom: 6px; }
+p  { font-size: 12px; color: var(--text3); line-height: 1.55; }
+
+/* ── Cards / panels ───────────────────────────────────── */
+.card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+.card.blue  { border-color: var(--blue);   }
+.card.green { border-color: var(--green);  }
+.card.orange{ border-color: var(--orange); }
+.card.red   { border-color: var(--red);    }
+.card.pink  { border-color: var(--pink);   }
+.card.cyan  { border-color: var(--cyan);   }
+
+/* ── Grid helpers ─────────────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; }
+
+/* ── KPI badge ────────────────────────────────────────── */
+.kpi {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center;
+}
+.kpi .val {
+  font-size: 26px;
+  font-weight: 800;
+  font-family: 'JetBrains Mono', monospace;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.kpi .val.green-g {
+  background: linear-gradient(135deg, var(--green), #1abc9c);
+  -webkit-background-clip: text; background-clip: text;
+}
+.kpi .val.orange-g {
+  background: linear-gradient(135deg, var(--orange), var(--yellow));
+  -webkit-background-clip: text; background-clip: text;
+}
+.kpi .val.red-g {
+  background: linear-gradient(135deg, var(--red), var(--orange));
+  -webkit-background-clip: text; background-clip: text;
+}
+.kpi .lbl { font-size: 10px; color: var(--text2); margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ── Tag chips ────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 600;
+  padding: 2px 8px; border-radius: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.tag.blue   { background: rgba(47,128,237,.18); color: #6eb3ff; border: 1px solid rgba(47,128,237,.35); }
+.tag.green  { background: rgba(39,174,96,.18);  color: #5dda8d; border: 1px solid rgba(39,174,96,.35); }
+.tag.orange { background: rgba(230,126,34,.18); color: #f5a358; border: 1px solid rgba(230,126,34,.35);}
+.tag.pink   { background: rgba(204,121,167,.18);color: #e6a0ce; border: 1px solid rgba(204,121,167,.35);}
+.tag.red    { background: rgba(231,76,60,.18);  color: #f08080; border: 1px solid rgba(231,76,60,.35); }
+.tag.cyan   { background: rgba(88,196,220,.18); color: var(--cyan); border: 1px solid rgba(88,196,220,.35);}
+.tag.yellow { background: rgba(241,196,15,.18); color: #f5d76e; border: 1px solid rgba(241,196,15,.35);}
+
+/* ── Bullet list ──────────────────────────────────────── */
+ul.blist { list-style: none; }
+ul.blist li { font-size: 12px; color: var(--text3); padding: 4px 0 4px 18px; position: relative; line-height: 1.5; }
+ul.blist li::before { content: '▸'; position: absolute; left: 0; color: var(--cyan); font-size: 11px; top: 5px; }
+ul.blist li strong { color: var(--text1); }
+ul.blist li .tag { margin-left: 4px; }
+
+/* ── Platform table ───────────────────────────────────── */
+table.ptable { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+table.ptable th {
+  background: var(--surface); color: var(--text2);
+  font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 8px 10px; text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+table.ptable td {
+  padding: 7px 10px; border-bottom: 1px solid var(--border);
+  color: var(--text3); vertical-align: middle;
+}
+table.ptable tr:last-child td { border-bottom: none; }
+table.ptable tr:hover td { background: rgba(255,255,255,.03); }
+table.ptable td.mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+
+/* ── Image full/half ──────────────────────────────────── */
+.img-full   { width: 100%; max-height: 125mm; object-fit: contain; border-radius: 8px; }
+.img-half   { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+.img-wrap   { background: #fff; border-radius: 8px; padding: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+
+/* ── Finding block ────────────────────────────────────── */
+.finding {
+  display: flex; gap: 8px; align-items: flex-start;
+  padding: 6px 10px;
+  background: var(--surface2);
+  border-radius: 8px;
+  border-left: 3px solid var(--cyan);
+  margin-bottom: 7px;
+}
+.finding .ico { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+.finding p { font-size: 11.5px; color: var(--text3); }
+.finding.warn { border-color: var(--orange); }
+.finding.bad  { border-color: var(--red);    }
+.finding.good { border-color: var(--green);  }
+
+/* ── Spec row ─────────────────────────────────────────── */
+.spec-row {
+  display: flex; justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 11.5px;
+}
+.spec-row:last-child { border-bottom: none; }
+.spec-row .sk { color: var(--text2); font-weight: 500; }
+.spec-row .sv { color: var(--text1); font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+
+/* ── Divider ──────────────────────────────────────────── */
+.divider { height: 1px; background: var(--border); margin: 10px 0; }
+
+/* ── Title slide specific ─────────────────────────────── */
+.slide.title-slide {
+  background: radial-gradient(ellipse at 70% 40%, rgba(47,128,237,.15) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(39,174,96,.1) 0%, transparent 50%),
+              #0d1117;
+  justify-content: center;
+}
+.title-slide .slide-body {
+  justify-content: center;
+  padding: 28px 48px;
+}
+
+/* ── Optimization pill ────────────────────────────────── */
+.opt-pill {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+.opt-pill .opt-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+}
+.opt-pill .opt-body h4 { font-size: 12.5px; font-weight: 700; color: var(--text1); margin-bottom: 2px; }
+.opt-pill .opt-body p  { font-size: 11px; color: var(--text2); line-height: 1.45; }
+.opt-pill.blue  .opt-icon { background: rgba(47,128,237,.2); }
+.opt-pill.green .opt-icon { background: rgba(39,174,96,.2);  }
+.opt-pill.orange.opt-icon { background: rgba(230,126,34,.2); }
+.opt-pill.yellow .opt-icon{ background: rgba(241,196,15,.2); }
+.opt-pill.cyan  .opt-icon { background: rgba(88,196,220,.2); }
+.opt-pill.pink  .opt-icon { background: rgba(204,121,167,.2);}
+
+/* ── Footer ───────────────────────────────────────────── */
+.slide-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 32px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.slide-footer span { font-size: 10px; color: var(--text2); }
+.slide-footer .prog-bar {
+  width: 80px; height: 3px;
+  background: var(--border);
+  border-radius: 2px; overflow: hidden;
+}
+.slide-footer .prog-bar .prog-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  border-radius: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 1 — TITLE
+══════════════════════════════════════════════════════════ -->
+<div class="slide title-slide">
+  <div class="accent-bar"></div>
+  <div class="slide-body" style="gap:24px;">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px;">
+      <span class="tag cyan">Internship Project · DISI – University of Trento</span>
+      <span class="tag blue">INT8 Quantization · Edge AI</span>
+    </div>
+
+    <h1 class="slide-main-title">NPU Performance Benchmark<br>& Analysis on STM32N657</h1>
+
+    <p style="font-size:14px;color:var(--text2);max-width:480px;line-height:1.6;">
+      Comparative evaluation of single-layer neural network operators deployed on
+      the ST <strong style="color:var(--cyan)">Neural-ART™</strong> accelerator,
+      across two compiler generations and two hardware platforms.
+    </p>
+
+    <div class="divider" style="margin-top:8px;"></div>
+
+    <div class="grid-4" style="max-width:600px;">
+      <div class="kpi">
+        <div class="val">8</div>
+        <div class="lbl">Operators Tested</div>
+      </div>
+      <div class="kpi">
+        <div class="val green-g">4</div>
+        <div class="lbl">Platforms</div>
+      </div>
+      <div class="kpi">
+        <div class="val orange-g">2</div>
+        <div class="lbl">Compiler Versions</div>
+      </div>
+      <div class="kpi">
+        <div class="val" style="font-size:20px;">INT8</div>
+        <div class="lbl">Quantization</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div style="display:flex;gap:32px;align-items:flex-end;">
+      <div>
+        <p style="font-size:11px;color:var(--text2);margin-bottom:2px;">Author</p>
+        <p style="font-size:13px;color:var(--text1);font-weight:600;">Matteo Miglio · Matricola 243947</p>
+      </div>
+      <div>
+        <p style="font-size:11px;color:var(--text2);margin-bottom:2px;">Supervisors</p>
+        <p style="font-size:13px;color:var(--text1);font-weight:600;">Prof. Vella · Prof. Yildirim</p>
+      </div>
+      <div style="margin-left:auto;text-align:right;">
+        <p style="font-size:11px;color:var(--text2);margin-bottom:2px;">Department</p>
+        <p style="font-size:13px;color:var(--text1);font-weight:600;">DISI – University of Trento</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <span>1 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 2 — AGENDA
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Overview</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Agenda</div><div class="slide-num">2 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:20px;">
+    <div style="flex:1;">
+      <h2 class="section-heading"><span class="ico">📋</span>Presentation Outline</h2>
+      <div class="grid-2" style="gap:10px;">
+        <!-- Col 1 -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="card blue">
+            <h3 style="color:var(--blue);">① NPU Architecture</h3>
+            <p>STM32N657 Neural-ART™ hardware specs, memory subsystem, streaming engine model.</p>
+          </div>
+          <div class="card cyan">
+            <h3 style="color:var(--cyan);">② Test Setup</h3>
+            <p>Four compiler–platform configurations tested: CubeMX v2.2, AI Studio v4.0, DevCloud v2.2 & v4.0.</p>
+          </div>
+          <div class="card green">
+            <h3 style="color:var(--green);">③ Inference Latency</h3>
+            <p>Measured execution time per operator across all platforms. FAIL cases identified.</p>
+          </div>
+          <div class="card orange">
+            <h3 style="color:var(--orange);">④ Memory Analysis</h3>
+            <p>Actual RAM & Flash usage vs. compiler-estimated predictions. Estimation error quantified.</p>
+          </div>
+        </div>
+        <!-- Col 2 -->
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="card pink">
+            <h3 style="color:var(--pink);">⑤ Throughput & Speedup</h3>
+            <p>MACC/ms efficiency metric and relative speedup heatmap vs. CubeMX reference.</p>
+          </div>
+          <div class="card" style="border-color:var(--yellow);">
+            <h3 style="color:var(--yellow);">⑥ HW Epoch Partitioning</h3>
+            <p>How the compiler tiles oversized models into multiple hardware epochs to fit SRAM.</p>
+          </div>
+          <div class="card" style="border-color:var(--cyan);">
+            <h3 style="color:var(--cyan);">⑦ Key Findings</h3>
+            <p>Cross-platform observations, compiler behaviour, and outlier identification.</p>
+          </div>
+          <div class="card" style="border-color:var(--green);">
+            <h3 style="color:var(--green);">⑧ Optimization Roadmap</h3>
+            <p>Actionable strategies to improve latency, memory efficiency and compiler accuracy.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:12%;"></div></div>
+    <span>2 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 3 — STM32N657 NPU ARCHITECTURE
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Hardware</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">NPU Architecture</div><div class="slide-num">3 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:18px;">
+
+    <!-- Left: specs -->
+    <div style="flex:1.1;display:flex;flex-direction:column;gap:10px;">
+      <h2 class="section-heading"><span class="ico">⚙️</span>Neural-ART™ Accelerator — STM32N657</h2>
+      <p style="margin-bottom:8px;font-size:12px;">
+        Both the <strong style="color:var(--blue)">Nucleo-N657X0-Q</strong> and the
+        <strong style="color:var(--orange)">STM32N6570-DK</strong> mount the
+        <strong style="color:var(--cyan)">same STM32N657</strong> SoC and therefore share
+        an identical NPU silicon — any performance difference observed between the two boards
+        is purely due to <em>compiler version</em> and <em>toolchain configuration</em>.
+      </p>
+
+      <div class="card cyan" style="padding:12px 16px;">
+        <h3 style="color:var(--cyan);margin-bottom:8px;">Core NPU Specifications</h3>
+        <div class="spec-row"><span class="sk">NPU Name</span><span class="sv">Neural-ART™ Accelerator</span></div>
+        <div class="spec-row"><span class="sk">MAC Units</span><span class="sv">~300 configurable MACs</span></div>
+        <div class="spec-row"><span class="sk">Peak Frequency</span><span class="sv">1 GHz</span></div>
+        <div class="spec-row"><span class="sk">Peak Throughput</span><span class="sv">600 GOPS (INT8)</span></div>
+        <div class="spec-row"><span class="sk">Energy Efficiency</span><span class="sv">~3 TOPS/W</span></div>
+        <div class="spec-row"><span class="sk">Dataflow Model</span><span class="sv">Streaming / Reconfigurable</span></div>
+        <div class="spec-row"><span class="sk">Host CPU</span><span class="sv">Arm® Cortex-M55 @ 800 MHz (Helium/MVE)</span></div>
+      </div>
+
+      <div class="card" style="border-color:var(--orange);">
+        <h3 style="color:var(--orange);margin-bottom:8px;">Memory Subsystem</h3>
+        <div class="spec-row"><span class="sk">On-chip SRAM</span><span class="sv">4.2 MB contiguous (AXISRAM)</span></div>
+        <div class="spec-row"><span class="sk">NPU Buffer (NPURAM)</span><span class="sv">AXISRAM3–6 partitioned for NPU</span></div>
+        <div class="spec-row"><span class="sk">AXI Bus to Memory</span><span class="sv">2 × 64-bit AXI interfaces</span></div>
+        <div class="spec-row"><span class="sk">AXI Cache</span><span class="sv">CACHEAXI — NPU data caching</span></div>
+        <div class="spec-row"><span class="sk">HW Epoch limit</span><span class="sv">~1.5 MB internal activation buffer</span></div>
+      </div>
+    </div>
+
+    <!-- Right: conceptual diagram -->
+    <div style="flex:0.9;display:flex;flex-direction:column;gap:10px;">
+      <div class="card blue">
+        <h3 style="color:var(--blue);margin-bottom:8px;">Streaming Dataflow Architecture</h3>
+        <p style="font-size:11.5px;line-height:1.55;margin-bottom:8px;">
+          The Neural-ART NPU uses a <strong style="color:var(--text1)">streaming processing engine</strong>:
+          rather than loading full activation maps into SRAM, data flows continuously through the
+          MAC array from input to output, dramatically reducing memory bandwidth requirements.
+        </p>
+        <!-- Simple architecture diagram via HTML/CSS -->
+        <div style="background:rgba(0,0,0,.3);border-radius:8px;padding:10px;font-size:10.5px;font-family:'JetBrains Mono',monospace;">
+          <div style="text-align:center;color:var(--cyan);font-weight:600;margin-bottom:6px;">STM32N657 Block Diagram</div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:center;">
+            <div style="background:rgba(47,128,237,.25);border:1px solid var(--blue);border-radius:6px;padding:4px 20px;width:80%;text-align:center;color:#6eb3ff;">Cortex-M55 @ 800 MHz + Helium MVE</div>
+            <div style="color:var(--text2);font-size:9px;">↕ AXI Bus</div>
+            <div style="background:rgba(88,196,220,.2);border:1px solid var(--cyan);border-radius:6px;padding:4px 20px;width:80%;text-align:center;color:var(--cyan);">Neural-ART™ NPU (300 MACs, 1 GHz)</div>
+            <div style="color:var(--text2);font-size:9px;">↕ 2 × 64-bit AXI</div>
+            <div style="display:flex;gap:8px;width:80%;">
+              <div style="flex:1;background:rgba(230,126,34,.18);border:1px solid var(--orange);border-radius:6px;padding:4px 6px;text-align:center;color:#f5a358;font-size:10px;">4.2 MB SRAM<br/>(AXISRAM 1–6)</div>
+              <div style="flex:1;background:rgba(39,174,96,.15);border:1px solid var(--green);border-radius:6px;padding:4px 6px;text-align:center;color:#5dda8d;font-size:10px;">CACHEAXI<br/>(NPU cache)</div>
+            </div>
+            <div style="color:var(--text2);font-size:9px;">↕ FMC / XSPI</div>
+            <div style="background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:4px 20px;width:80%;text-align:center;color:var(--text2);">External Flash / PSRAM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="border-color:var(--yellow);">
+        <h3 style="color:var(--yellow);margin-bottom:4px;">Hardware Epoch Concept</h3>
+        <p style="font-size:11px;line-height:1.5;">
+          When a layer's activation tensors exceed the <strong style="color:var(--yellow)">~1.5 MB NPU SRAM buffer</strong>,
+          the compiler partitions execution into multiple <em>hardware epochs</em> — tiling the computation so
+          each epoch fits within the physical memory limit. More epochs → higher latency.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:18%;"></div></div>
+    <span>3 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 4 — TEST SETUP
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Methodology</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Test Setup</div><div class="slide-num">4 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:18px;">
+
+    <div style="flex:1.2;display:flex;flex-direction:column;gap:12px;">
+      <h2 class="section-heading"><span class="ico">🧪</span>Benchmark Configuration</h2>
+
+      <!-- Platform table -->
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th>Platform ID</th>
+            <th>Toolchain</th>
+            <th>AI Core Ver.</th>
+            <th>Board</th>
+            <th>Access</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag blue">CubeMX v2.2 (Nucleo)</span></td>
+            <td>STM32CubeMX + X-CUBE-AI</td>
+            <td class="mono">AI Core v2.2</td>
+            <td>STM32N6 Nucleo</td>
+            <td>Local (physical board)</td>
+          </tr>
+          <tr>
+            <td><span class="tag green">AI Studio v4.0 (Nucleo)</span></td>
+            <td>STM32 AI Studio</td>
+            <td class="mono">AI Core v4.0</td>
+            <td>STM32N6 Nucleo</td>
+            <td>Local (physical board)</td>
+          </tr>
+          <tr>
+            <td><span class="tag orange">DevCloud v2.2 (DK)</span></td>
+            <td>ST Developer Cloud</td>
+            <td class="mono">AI Core v2.2</td>
+            <td>STM32N6570-DK</td>
+            <td>Remote (cloud)</td>
+          </tr>
+          <tr>
+            <td><span class="tag pink">DevCloud v4.0 (DK)</span></td>
+            <td>ST Developer Cloud</td>
+            <td class="mono">AI Core v4.0</td>
+            <td>STM32N6570-DK</td>
+            <td>Remote (cloud)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card" style="border-color:var(--cyan);margin-top:2px;">
+        <h3 style="color:var(--cyan);margin-bottom:6px;">Experimental Protocol</h3>
+        <ul class="blist">
+          <li>All models: <strong>single-layer microbenchmarks</strong>, INT8 quantized, input shape 64×64×3</li>
+          <li>Metrics collected: <strong>inference time (ms)</strong>, RAM usage (KiB), Flash usage (KiB), MACC count, hardware epochs</li>
+          <li>Compiler-estimated values recorded independently for comparison (static analysis)</li>
+          <li>FAIL = hardware timeout, OOM, or compilation failure (noted in results)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Right: models list -->
+    <div style="flex:0.8;display:flex;flex-direction:column;gap:10px;">
+      <div class="card" style="border-color:var(--blue);">
+        <h3 style="color:var(--blue);margin-bottom:8px;">Tested Operators (INT8)</h3>
+        <table style="width:100%;font-size:11px;border-collapse:collapse;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);">
+              <th style="text-align:left;color:var(--text2);padding:4px 6px;font-weight:600;">Layer</th>
+              <th style="text-align:right;color:var(--text2);padding:4px 6px;font-weight:600;">MACC (M)</th>
+            </tr>
+          </thead>
+          <tbody style="font-family:'JetBrains Mono',monospace;">
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:4px 6px;color:var(--text3);">Depthwise Conv2D 3×3</td><td style="text-align:right;padding:4px 6px;color:var(--cyan);">0.34</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:4px 6px;color:var(--text3);">Conv2D 16f 3×3</td><td style="text-align:right;padding:4px 6px;color:var(--cyan);">1.80</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:4px 6px;color:var(--text3);">Conv2D + MaxPool 16f 3×3</td><td style="text-align:right;padding:4px 6px;color:var(--cyan);">1.80</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:4px 6px;color:var(--text3);">Conv2D 32f 1×1 (Pointwise)</td><td style="text-align:right;padding:4px 6px;color:var(--cyan);">0.46</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:4px 6px;color:var(--text3);">Conv2D 32f 3×3</td><td style="text-align:right;padding:4px 6px;color:var(--cyan);">3.60</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:4px 6px;color:var(--text3);">Conv2D 32f 5×5</td><td style="text-align:right;padding:4px 6px;color:var(--cyan);">9.96</td></tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04);"><td style="padding:4px 6px;color:var(--text3);">Conv2D 64f 3×3</td><td style="text-align:right;padding:4px 6px;color:var(--cyan);">7.21</td></tr>
+            <tr><td style="padding:4px 6px;color:var(--text3);">Conv2D 32f 7×7</td><td style="text-align:right;padding:4px 6px;color:var(--red);">19.66</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card" style="border-color:var(--yellow);">
+        <h3 style="color:var(--yellow);margin-bottom:4px;">Analysis Dimensions</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;">
+          <span class="tag cyan">Inference Time</span>
+          <span class="tag orange">RAM Usage</span>
+          <span class="tag blue">Flash Usage</span>
+          <span class="tag green">MACC Count</span>
+          <span class="tag yellow">HW Epochs</span>
+          <span class="tag pink">Throughput</span>
+          <span class="tag blue">Speedup</span>
+          <span class="tag red">Estimation Error</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:24%;"></div></div>
+    <span>4 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 5 — INFERENCE TIME
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Results</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Inference Time</div><div class="slide-num">5 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:16px;">
+    <div style="flex:1.6;display:flex;flex-direction:column;">
+      <h2 class="section-heading"><span class="ico">⏱️</span>Inference Time per Layer & Platform (ms)</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/11_inference_time_bar_plot.png" alt="Inference Time Bar Plot"/>
+      </div>
+    </div>
+    <div style="flex:0.85;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+      <h3 style="color:var(--text1);font-size:13px;margin-bottom:4px;">Key Observations</h3>
+
+      <div class="finding good">
+        <span class="ico">🏆</span>
+        <p><strong style="color:var(--green);">CubeMX v2.2 (Nucleo)</strong> achieves the lowest latency for most layers — fastest overall for pointwise 1×1 (0.146 ms) and depthwise 3×3 (0.042 ms).</p>
+      </div>
+      <div class="finding good">
+        <span class="ico">⚡</span>
+        <p><strong style="color:var(--pink);">DevCloud v4.0 (DK)</strong> is the fastest for simple standard convolutions (e.g. 16f 3×3 at 0.086 ms), but struggles on large models.</p>
+      </div>
+      <div class="finding warn">
+        <span class="ico">🐢</span>
+        <p><strong style="color:var(--green);">AI Studio v4.0 (Nucleo)</strong> is consistently slower than CubeMX for all layers — likely due to sub-optimal epoch scheduling in v4.0 on the Nucleo.</p>
+      </div>
+      <div class="finding bad">
+        <span class="ico">❌</span>
+        <p><strong style="color:var(--red);">Conv2D 32f 7×7 FAILS</strong> on both AI Studio v4.0 and DevCloud v4.0: the activation buffer (1,546+ KiB) saturates the ~1.5 MB NPU SRAM limit — even with Epoch Controller active.</p>
+      </div>
+
+      <div style="margin-top:6px;">
+        <p style="font-size:11px;color:var(--text2);">Inference time range (successful runs):</p>
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <div class="kpi card" style="flex:1;padding:8px;">
+            <div class="val green-g" style="font-size:20px;">0.031</div>
+            <div class="lbl">Min ms<br/>(DW 3×3)</div>
+          </div>
+          <div class="kpi card" style="flex:1;padding:8px;">
+            <div class="val red-g" style="font-size:20px;">0.473</div>
+            <div class="lbl">Max ms<br/>(7×7, AICore2.2)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:30%;"></div></div>
+    <span>5 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 6 — HEATMAP
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Results</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Inference Time Heatmap</div><div class="slide-num">6 / 19</div></div>
+  </div>
+  <div class="slide-body">
+    <h2 class="section-heading"><span class="ico">🗺️</span>Inference Time Heatmap — Absolute & Row-Normalized</h2>
+    <div class="img-wrap" style="flex:1;">
+      <img class="img-full" src="plot/19_inference_heatmap.png" alt="Inference Heatmap"/>
+    </div>
+    <div class="grid-3" style="gap:10px;margin-top:10px;">
+      <div class="finding good" style="margin:0;">
+        <span class="ico">✅</span>
+        <p><strong>CubeMX (Nucleo)</strong> is fastest or co-fastest on 6 of 8 layers in the normalized view (dark green cells).</p>
+      </div>
+      <div class="finding warn" style="margin:0;">
+        <span class="ico">⚠️</span>
+        <p><strong>AI Studio v4.0</strong> is consistently the slowest on the Nucleo board, particularly visible on pointwise and standard conv layers.</p>
+      </div>
+      <div class="finding bad" style="margin:0;">
+        <span class="ico">❌</span>
+        <p><strong>7×7 FAIL</strong> on AI Studio and DevCloud v4.0 appears as missing cells — both v4.0 compilers cannot schedule this layer within the HW budget.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:35%;"></div></div>
+    <span>6 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 7 — HW EPOCHS
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Results</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Hardware Epochs</div><div class="slide-num">7 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:16px;">
+    <div style="flex:1.5;display:flex;flex-direction:column;">
+      <h2 class="section-heading"><span class="ico">🔢</span>Hardware Epoch Partitioning per Layer & Platform</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/13_hardware_epochs_bar.png" alt="Hardware Epochs"/>
+      </div>
+    </div>
+    <div style="flex:0.9;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+      <h3 style="color:var(--text1);font-size:13px;">What Drives Epoch Count?</h3>
+      <p style="font-size:11.5px;margin-bottom:8px;">The compiler partitions a layer into N epochs when the activation buffer required exceeds the internal ~1.5 MB SRAM window. Each additional epoch introduces a reload-and-store cycle, increasing latency.</p>
+
+      <div class="finding">
+        <span class="ico">1️⃣</span>
+        <p>Most standard convolutions (16f 3×3, 32f 3×3, 64f 3×3, 5×5) fit in a <strong>single epoch</strong> on all platforms — excellent NPU utilization.</p>
+      </div>
+      <div class="finding warn">
+        <span class="ico">2️⃣</span>
+        <p><strong>Depthwise 3×3</strong> is split into 2–3 epochs depending on the platform: the compiler over-allocates RAM due to weight-repacking for NPU alignment, forcing partitioning unnecessarily.</p>
+      </div>
+      <div class="finding warn">
+        <span class="ico">2️⃣</span>
+        <p><strong>Pointwise 1×1</strong> requires 2 epochs on most platforms despite low MACC count — its large output activation map (64×64×32) is the bottleneck.</p>
+      </div>
+      <div class="finding bad">
+        <span class="ico">4️⃣</span>
+        <p><strong>Conv2D 32f 7×7</strong> requires 4–5 epochs on v2.2 platforms due to 1,292–1,548 KiB activations; v4.0 times out entirely.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:41%;"></div></div>
+    <span>7 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 8 — RAM USAGE
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Memory</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">RAM: Estimated vs Actual</div><div class="slide-num">8 / 19</div></div>
+  </div>
+  <div class="slide-body">
+    <h2 class="section-heading"><span class="ico">🧠</span>RAM Usage — Compiler Estimated vs. Hardware Measured (Log Scale)</h2>
+    <div class="img-wrap" style="flex:1;max-height:110mm;">
+      <img class="img-full" src="plot/9_ram_estimated_vs_actual_side_by_side.png" alt="RAM Side by Side"/>
+    </div>
+    <div class="grid-3" style="gap:10px;margin-top:10px;">
+      <div class="finding bad" style="margin:0;">
+        <span class="ico">💥</span>
+        <p><strong>7×7 Conv on DevCloud v4.0</strong>: estimated 1,546 KiB — actual 1,548 KiB. Exceeds buffer → HW timeout. Estimation is accurate but the model is simply too large.</p>
+      </div>
+      <div class="finding warn" style="margin:0;">
+        <span class="ico">📈</span>
+        <p><strong>Pointwise 1×1</strong>: actual RAM (130–140 KiB) vastly exceeds estimates (12 KiB on some tools) — the large output activation (64×64×32) is not correctly predicted.</p>
+      </div>
+      <div class="finding good" style="margin:0;">
+        <span class="ico">✅</span>
+        <p>Standard convolutions (16f, 32f, 64f 3×3, 5×5) are accurately estimated at ~12 KiB across all platforms, confirming reliable compiler predictions for compute-bound layers.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:47%;"></div></div>
+    <span>8 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 9 — RAM ESTIMATION ERROR
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Memory</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">RAM Estimation Accuracy</div><div class="slide-num">9 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:16px;">
+    <div style="flex:1.6;display:flex;flex-direction:column;">
+      <h2 class="section-heading"><span class="ico">📐</span>RAM Estimation Error Δ% (Actual − Estimated) / Estimated</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/15_ram_estimation_error_delta.png" alt="RAM Delta %"/>
+      </div>
+    </div>
+    <div style="flex:0.85;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+      <h3 style="color:var(--text1);font-size:13px;">Estimation Accuracy Analysis</h3>
+      <p style="font-size:11.5px;color:var(--text2);margin-bottom:6px;">
+        Δ% = <em>(Actual − Estimated) / Estimated × 100</em><br/>
+        Positive = compiler under-estimates (risky — may cause OOM).<br/>
+        Near-zero = accurate prediction.
+      </p>
+
+      <div class="finding bad">
+        <span class="ico">⬆️</span>
+        <p><strong>Depthwise 3×3 (CubeMX):</strong> actual RAM is 100% higher than estimated — compiler doubles RAM due to weight-repacking alignment overhead for the NPU. This is a known compiler artifact.</p>
+      </div>
+      <div class="finding bad">
+        <span class="ico">🔴</span>
+        <p><strong>Pointwise 1×1 (AI Studio / DevCloud v4.0):</strong> compiler estimates 12 KiB but actual is 130–140 KiB (+900% to +1050%). Streaming output activations are severely underestimated.</p>
+      </div>
+      <div class="finding good">
+        <span class="ico">✅</span>
+        <p><strong>Standard convolutions</strong> (3×3, 5×5, 64f 3×3): Δ% is ≈ 0% across all tools — the compiler predicts RAM correctly for typical compute-bound layers.</p>
+      </div>
+      <div class="finding">
+        <span class="ico">ℹ️</span>
+        <p><strong>7×7 layer:</strong> estimation is accurate (near 0%) — the model is too large by design, not due to compiler error.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:53%;"></div></div>
+    <span>9 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 10 — FLASH + MACC
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Memory & Complexity</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Flash & MACC</div><div class="slide-num">10 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:14px;">
+    <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+      <h2 class="section-heading"><span class="ico">💾</span>Flash Usage (KiB)</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/14_flash_usage_bar.png" alt="Flash Usage"/>
+      </div>
+      <div class="finding" style="margin:0;">
+        <span class="ico">ℹ️</span>
+        <p>Flash stores quantized weights. All platforms show <strong>identical Flash footprints</strong> per operator — confirming the model size is compiler-independent for INT8. 7×7 is largest at 4.72 KiB.</p>
+      </div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+      <h2 class="section-heading"><span class="ico">🔢</span>MACC — Estimated vs Actual</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/10_macc_estimated_vs_actual_side_by_side.png" alt="MACC"/>
+      </div>
+      <div class="finding warn" style="margin:0;">
+        <span class="ico">⚠️</span>
+        <p><strong>DevCloud v2.2 reports 0 MACC</strong> in the static estimate (tool limitation — not exported). Actual MACC counts are consistent across all platforms for the same layer, varying slightly due to padding/kernel packing differences between compiler versions.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:59%;"></div></div>
+    <span>10 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 11 — THROUGHPUT
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Performance</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Computational Throughput</div><div class="slide-num">11 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:16px;">
+    <div style="flex:1.6;display:flex;flex-direction:column;">
+      <h2 class="section-heading"><span class="ico">🚀</span>Throughput — MACC/ms (NPU Utilisation Proxy)</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/16_throughput_macc_per_ms.png" alt="Throughput"/>
+      </div>
+    </div>
+    <div style="flex:0.85;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+      <h3 style="color:var(--text1);font-size:13px;">Why Throughput Matters</h3>
+      <p style="font-size:11.5px;color:var(--text2);margin-bottom:8px;">
+        Raw inference time is model-size-dependent. Throughput (MACC/ms) normalises by complexity
+        and reveals true NPU utilisation — how many operations per ms the hardware is actually executing.
+      </p>
+
+      <div class="finding good">
+        <span class="ico">🏆</span>
+        <p><strong>CubeMX v2.2</strong> delivers the highest throughput for compute-bound layers like 5×5 and 7×7, suggesting superior operator scheduling and NPU utilisation by the v2.2 compiler backend.</p>
+      </div>
+      <div class="finding warn">
+        <span class="ico">📉</span>
+        <p><strong>Pointwise 1×1 and Depthwise 3×3</strong> show dramatically lower throughput on all platforms — these layers are <em>memory-bound</em>, not compute-bound, and the streaming engine cannot fully pipeline due to large output tensors.</p>
+      </div>
+      <div class="finding">
+        <span class="ico">📊</span>
+        <p><strong>Standard Conv (3×3, 5×5, 64f 3×3)</strong> achieve the best MACC/ms — close to the theoretical peak — confirming that regular convolutions are the NPU's "sweet spot" operator.</p>
+      </div>
+
+      <div class="grid-2" style="gap:8px;margin-top:4px;">
+        <div class="kpi card" style="padding:8px;">
+          <div class="val green-g" style="font-size:17px;">~100B</div>
+          <div class="lbl">Peak MACC/ms<br/>(5×5, CubeMX)</div>
+        </div>
+        <div class="kpi card" style="padding:8px;">
+          <div class="val red-g" style="font-size:17px;">~1.1B</div>
+          <div class="lbl">Min MACC/ms<br/>(DW 3×3, AIStudio)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:65%;"></div></div>
+    <span>11 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 12 — SPEEDUP HEATMAP
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Performance</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Relative Speedup</div><div class="slide-num">12 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:16px;">
+    <div style="flex:1.5;display:flex;flex-direction:column;">
+      <h2 class="section-heading"><span class="ico">📊</span>Speedup Heatmap — Reference: CubeMX v2.2 (Nucleo)</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/17_speedup_heatmap.png" alt="Speedup Heatmap"/>
+      </div>
+    </div>
+    <div style="flex:0.9;display:flex;flex-direction:column;gap:8px;justify-content:center;">
+      <h3 style="color:var(--text1);font-size:13px;">Speedup Interpretation</h3>
+      <p style="font-size:11.5px;color:var(--text2);margin-bottom:6px;">
+        Speedup = t<sub>CubeMX</sub> / t<sub>platform</sub>.
+        Green (&gt;1) = faster than reference. Red (&lt;1) = slower.
+      </p>
+
+      <div class="finding good">
+        <span class="ico">🟢</span>
+        <p><strong>DevCloud v4.0</strong> is up to <strong>1.85× faster</strong> than CubeMX on depthwise 3×3 (0.031 ms vs 0.042 ms) — the v4.0 compiler optimises memory-bound operators better on the DK board.</p>
+      </div>
+      <div class="finding warn">
+        <span class="ico">🔴</span>
+        <p><strong>AI Studio v4.0 (Nucleo)</strong> is consistently 1.3–2.5× <em>slower</em> than CubeMX — same hardware, different compiler. The v4.0 toolchain on the Nucleo generates less efficient epoch scheduling for this board configuration.</p>
+      </div>
+      <div class="finding">
+        <span class="ico">🔵</span>
+        <p><strong>DevCloud v2.2 (DK)</strong> tracks very closely with AI Studio v4.0 (Nucleo) for most layers despite different boards and compiler versions — suggesting the DK board may introduce some measurement overhead.</p>
+      </div>
+      <div class="finding bad">
+        <span class="ico">❌</span>
+        <p><strong>7×7 FAIL</strong> on v4.0 platforms: both AI Studio and DevCloud v4.0 cannot execute this layer, while both v2.2 platforms succeed with 4-epoch partitioning at ~0.46–0.47 ms.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:71%;"></div></div>
+    <span>12 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 13 — SCATTER + RAM EFF
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Analysis</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Complexity vs Latency</div><div class="slide-num">13 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:14px;">
+    <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+      <h2 class="section-heading" style="font-size:17px;"><span class="ico">🔵</span>MACC vs Inference Time</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/18_scatter_macc_vs_inference.png" alt="Scatter MACC vs Time"/>
+      </div>
+      <div class="finding" style="margin:0;">
+        <span class="ico">📈</span>
+        <p>Strong linear relationship for standard convolutions. <strong>Depthwise</strong> and <strong>Pointwise</strong> 1×1 are outliers — high latency relative to MACC due to memory boundedness and epoch overhead.</p>
+      </div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:6px;">
+      <h2 class="section-heading" style="font-size:17px;"><span class="ico">📦</span>RAM per MMACC (Memory Efficiency)</h2>
+      <div class="img-wrap" style="flex:1;">
+        <img class="img-half" src="plot/20_ram_efficiency.png" alt="RAM Efficiency"/>
+      </div>
+      <div class="finding warn" style="margin:0;">
+        <span class="ico">⚠️</span>
+        <p><strong>Pointwise 1×1</strong> has extremely high RAM/MACC ratio (+1000× depthwise): it is a pure memory-bound layer where the NPU spends more energy moving data than computing. Ideal candidate for software optimization.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:76%;"></div></div>
+    <span>13 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 14 — DISTRIBUTIONS
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Statistics</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Distribution Analysis</div><div class="slide-num">14 / 19</div></div>
+  </div>
+  <div class="slide-body">
+    <h2 class="section-heading"><span class="ico">📦</span>Latency & RAM Distributions per Platform (Box Plots)</h2>
+    <div class="img-wrap" style="flex:1;max-height:115mm;">
+      <img class="img-full" src="plot/12_latency_vs_ram_distributions.png" alt="Distributions"/>
+    </div>
+    <div class="grid-4" style="gap:10px;margin-top:10px;">
+      <div class="card blue" style="padding:10px;">
+        <h3 style="color:var(--blue);margin-bottom:4px;">CubeMX v2.2</h3>
+        <p style="font-size:11px;">Lowest median latency. Compact IQR — consistent performance. Lowest RAM spread.</p>
+      </div>
+      <div class="card green" style="padding:10px;">
+        <h3 style="color:var(--green);margin-bottom:4px;">AI Studio v4.0</h3>
+        <p style="font-size:11px;">Higher median latency than CubeMX. Wider box — more variability across layer types. High RAM on 64f and 1×1.</p>
+      </div>
+      <div class="card orange" style="padding:10px;">
+        <h3 style="color:var(--orange);margin-bottom:4px;">DevCloud v2.2</h3>
+        <p style="font-size:11px;">Similar to AI Studio. RAM outlier visible: 272 KiB for 64f 3×3 — most expensive layer in memory.</p>
+      </div>
+      <div class="card pink" style="padding:10px;">
+        <h3 style="color:var(--pink);margin-bottom:4px;">DevCloud v4.0</h3>
+        <p style="font-size:11px;">Best median latency (7/8 tests). Only 7/8 success rate. RAM distribution is cleanest — v4.0 is more memory-conservative when it succeeds.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:82%;"></div></div>
+    <span>14 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 15 — CV MODEL DEPLOYMENT AUDIT
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">CV Model Audit</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Full-Model Deployment Results</div><div class="slide-num">15 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:16px;">
+
+    <div style="flex:1.1;display:flex;flex-direction:column;gap:8px;">
+      <h2 class="section-heading"><span class="ico">🔬</span>CV_Models Deployment Audit — Real Hardware</h2>
+      <p style="font-size:11.5px;margin-bottom:6px;">Beyond single-layer microbenchmarks, 10 state-of-the-art CV models from <code style="color:var(--cyan);font-family:'JetBrains Mono',monospace;">CV_Models.csv</code> were exported, INT8-quantized and compiled targeting the STM32N657 NPU. <strong style="color:var(--red)">None passed out-of-the-box.</strong> Three distinct failure categories emerged:</p>
+
+      <div class="finding bad">
+        <span class="ico">💥</span>
+        <div>
+          <p><strong style="color:var(--red);">① Activation Overflow (RAM Too Low)</strong></p>
+          <p>Models at native resolution (640×640) — YOLOv7, YOLOv8-n, YOLOv11-n/s/m/l/x, PIDNet-S, RTMDet-l — generate activation tensors exceeding the npuRAM banks (448 KB each). The NPU refuses to compile: <code style="color:var(--red);font-size:10px;">Model does not fit in Board. RAM Size too low</code>. Even enabling HyperRAM does not help; the external bus is too slow for active computation.</p>
+        </div>
+      </div>
+
+      <div class="finding bad">
+        <span class="ico">⚙️</span>
+        <div>
+          <p><strong style="color:var(--orange);">② Large-Kernel im2col Explosion (ResNet34)</strong></p>
+          <p>ResNet34 uses a 7×7 stem convolution. Even after patching the ONNX graph (removing <code style="color:var(--cyan);font-size:10px;">Shape</code> operators and <code style="color:var(--cyan);font-size:10px;">allowzero</code> attributes), the Neural-ART compiler expands the kernel via <em>im2col</em>, making the RAM requirement balloon: <code style="color:var(--orange);font-size:10px;">Warning: Oauto did not find valid compile options: aborting</code>. Both configurations (total bytes left unallocated = 3,211,264) confirm the chip cannot schedule it.</p>
+        </div>
+      </div>
+
+      <div class="finding bad">
+        <span class="ico">🚫</span>
+        <div>
+          <p><strong style="color:var(--pink);">③ Unsupported Operators — Transformer Layers (MobileCLIP-S0/B)</strong></p>
+          <p>MobileCLIP-S0 and MobileCLIP-B use Transformer / ViT components (LayerNorm, Self-Attention, NLP tokenizer input). Both compiler versions (v2.2 and v4.0) crash: <code style="color:var(--pink);font-size:10px;">INTERNAL ERROR: ONNX shape inference fails</code> (image encoder) and <code style="color:var(--pink);font-size:10px;">NOT IMPLEMENTED: Unknown layer format for Input_72</code> (text encoder). LayerNorm warnings confirm the operators are not mapped to any NPU primitive.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:0.9;display:flex;flex-direction:column;gap:8px;justify-content:flex-start;">
+      <h3 style="color:var(--text1);font-size:13px;margin-bottom:4px;">Summary Table</h3>
+      <table class="ptable">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Failure Cause</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>YOLOv7/v8/v11 (640px)</td><td>Activation > npuRAM</td><td><span class="tag red">RAM FAIL</span></td></tr>
+          <tr><td>PIDNet-S / RTMDet-l</td><td>Activation > npuRAM</td><td><span class="tag red">RAM FAIL</span></td></tr>
+          <tr><td>ResNet34</td><td>7×7 im2col overflow</td><td><span class="tag orange">OOM FAIL</span></td></tr>
+          <tr><td>MobileCLIP-S0 (image)</td><td>ONNX shape inference</td><td><span class="tag pink">COMPILER FAIL</span></td></tr>
+          <tr><td>MobileCLIP-S0 (text)</td><td>Unknown layer format</td><td><span class="tag pink">COMPILER FAIL</span></td></tr>
+          <tr><td>MobileCLIP-B (image)</td><td>list index out of range</td><td><span class="tag pink">COMPILER FAIL</span></td></tr>
+          <tr><td>MobileCLIP-B (text)</td><td>InvalidModelError (DQ)</td><td><span class="tag pink">COMPILER FAIL</span></td></tr>
+          <tr><td style="color:var(--green);"><strong>MobileNetV2 (224px)</strong></td><td style="color:var(--green);">CNN 3×3 only ✔</td><td><span class="tag green">✅ 48.3 FPS</span></td></tr>
+          <tr><td style="color:var(--green);"><strong>YOLOv8n / v11n (224px)</strong></td><td style="color:var(--green);">Downscaled + CNN ✔</td><td><span class="tag green">✅ COMPILED</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="card" style="border-color:var(--cyan);margin-top:6px;">
+        <h3 style="color:var(--cyan);margin-bottom:4px;">Required ONNX Patches Applied</h3>
+        <ul class="blist">
+          <li><strong>IR Version downgrade</strong>: 10 → 9 (CubeMX v2.2 limit)</li>
+          <li><strong>allowzero removal</strong>: stripped from all Reshape nodes</li>
+          <li><strong>Shape operator removal</strong>: re-exported ResNet34 with fixed batch=1</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:79%;"></div></div>
+    <span>15 / 19</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 16 — THE GOLDEN PATH
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">CV Model Audit</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">The Golden Path</div><div class="slide-num">16 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:20px;">
+
+    <div style="flex:1.1;display:flex;flex-direction:column;gap:10px;">
+      <h2 class="section-heading"><span class="ico">🏆</span>What Actually Works — The NPU "Golden Path"</h2>
+
+      <div class="card green" style="padding:14px;">
+        <h3 style="color:var(--green);margin-bottom:6px;">MobileNetV2 @ 224×224 — Image Classification</h3>
+        <div class="grid-2" style="gap:10px;margin-top:4px;">
+          <div>
+            <div class="spec-row"><span class="sk">Latency</span><span class="sv">20.694 ms</span></div>
+            <div class="spec-row"><span class="sk">Throughput</span><span class="sv">48.32 FPS</span></div>
+            <div class="spec-row"><span class="sk">HW Epochs</span><span class="sv">55 / 58 on NPU</span></div>
+            <div class="spec-row"><span class="sk">NPU Offload</span><span class="sv">&gt;94%</span></div>
+          </div>
+          <div>
+            <div class="spec-row"><span class="sk">Activations RAM</span><span class="sv">1.19 MiB</span></div>
+            <div class="spec-row"><span class="sk">Weights (Flash)</span><span class="sv">3.39 MiB (OctoFlash)</span></div>
+            <div class="spec-row"><span class="sk">npuRAM4 / npuRAM5</span><span class="sv">98.44% used</span></div>
+            <div class="spec-row"><span class="sk">Quantization error</span><span class="sv">cos=0.9976 (excellent)</span></div>
+          </div>
+        </div>
+        <p style="font-size:11px;margin-top:8px;color:var(--text2);">3 SW-only layers: DequantizeLinear, GlobalAveragePool, QuantizeLinear — all trivial post-processing on CPU.</p>
+      </div>
+
+      <div class="card blue" style="padding:14px;">
+        <h3 style="color:var(--blue);margin-bottom:6px;">YOLOv8-n / YOLOv11-n @ 224×224 — Object Detection</h3>
+        <p style="font-size:11.5px;">Downscaling from native 640×640 to 224×224 reduces the max activation tensor from ~1.6 MB to ~200 KB — well within a single 448 KB npuRAM bank. Both models compiled and validated successfully on hardware.</p>
+      </div>
+    </div>
+
+    <div style="flex:0.9;display:flex;flex-direction:column;gap:10px;justify-content:center;">
+
+      <div class="card" style="border-color:var(--cyan);padding:14px;">
+        <h3 style="color:var(--cyan);margin-bottom:8px;">NPU Architecture Compatibility Rules</h3>
+        <ul class="blist">
+          <li><strong>✅ Do use:</strong> Pure CNN with 3×3 / 5×5 kernels (max Depthwise Separable Conv)</li>
+          <li><strong>✅ Do use:</strong> Input resolutions keeping max activation &lt; 448 KB per bank</li>
+          <li><strong>✅ Do use:</strong> Weights in OctoFlash (up to 112 MB, no limit)</li>
+          <li><strong>❌ Avoid:</strong> Kernels ≥ 7×7 — im2col RAM explosion</li>
+          <li><strong>❌ Avoid:</strong> Transformer / Attention layers — not mapped to NPU</li>
+          <li><strong>❌ Avoid:</strong> LayerNorm, GELU, Self-Attention — compiler FAIL</li>
+          <li><strong>❌ Avoid:</strong> Dynamic ONNX shapes — shape inference crash</li>
+        </ul>
+      </div>
+
+      <div class="grid-2" style="gap:10px;">
+        <div class="kpi card" style="padding:14px;">
+          <div class="val green-g">48.3</div>
+          <div class="lbl">FPS on NPU<br/>(MobileNetV2)</div>
+        </div>
+        <div class="kpi card" style="padding:14px;">
+          <div class="val red-g">0 / 10</div>
+          <div class="lbl">SOTA models<br/>out-of-the-box</div>
+        </div>
+        <div class="kpi card" style="padding:14px;">
+          <div class="val orange-g">3</div>
+          <div class="lbl">Failure<br/>categories</div>
+        </div>
+        <div class="kpi card" style="padding:14px;">
+          <div class="val" style="font-size:18px;">94%+</div>
+          <div class="lbl">NPU offload<br/>on success</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:84%;"></div></div>
+    <span>16 / 19</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 17 — KEY FINDINGS SUMMARY
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Findings</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Key Findings</div><div class="slide-num">17 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:16px;">
+    <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+      <h2 class="section-heading"><span class="ico">🔍</span>NPU Behaviour — Key Findings</h2>
+
+      <div class="card blue">
+        <h3 style="color:var(--blue);margin-bottom:5px;">① Compiler Generation Matters More Than Board</h3>
+        <p>The same STM32N657 silicon shows very different performance depending on AI Core version. v2.2 (CubeMX) outperforms v4.0 (AI Studio) on the same Nucleo board for most layers — suggesting v4.0 epoch scheduling is not yet fully optimized for all operator types.</p>
+      </div>
+
+      <div class="card orange">
+        <h3 style="color:var(--orange);margin-bottom:5px;">② 1.5 MB SRAM is the Hard Limit</h3>
+        <p>The internal NPU SRAM buffer (~1.5 MB) is the primary constraint. Layers with activation tensors exceeding this require multi-epoch partitioning (latency penalty) or fail entirely (v4.0 Epoch Controller cannot handle 7×7 even with tiling).</p>
+      </div>
+
+      <div class="card green">
+        <h3 style="color:var(--green);margin-bottom:5px;">③ Standard Conv2D is the NPU Sweet Spot</h3>
+        <p>Regular convolutions (3×3, 5×5, 64f 3×3) show near-linear MACC→latency scaling, excellent throughput, accurate RAM predictions, and single-epoch execution. The Neural-ART streaming engine is purpose-built for these patterns.</p>
+      </div>
+    </div>
+
+    <div style="flex:1;display:flex;flex-direction:column;gap:8px;justify-content:flex-start;padding-top:38px;">
+      <div class="card red">
+        <h3 style="color:var(--red);margin-bottom:5px;">④ Memory-Bound Layers are Problematic</h3>
+        <p>Pointwise 1×1 (large output activations: 64×64×32) and Depthwise 3×3 (weight repacking overhead) are severely memory-bound. Their RAM/MACC ratio is 100–1000× higher than standard convolutions, exposing an architectural inefficiency in how the NPU handles these patterns.</p>
+      </div>
+
+      <div class="card pink">
+        <h3 style="color:var(--pink);margin-bottom:5px;">⑤ Estimation Accuracy Is Layer-Dependent</h3>
+        <p>Static compiler predictions are accurate for compute-bound standard convolutions (Δ% ≈ 0%) but fail badly for memory-bound layers: Depthwise 3×3 (+100%), Pointwise 1×1 (+900% on some tools). This makes capacity planning unreliable for MobileNet-style architectures.</p>
+      </div>
+
+      <div class="card" style="border-color:var(--cyan);">
+        <h3 style="color:var(--cyan);margin-bottom:5px;">⑥ Flash Is Compiler-Independent</h3>
+        <p>Flash usage for model weights is identical across all four platforms for the same operator — confirming that INT8 quantization produces the same binary weight layout regardless of compiler version, and Flash footprint is a fixed property of the model.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:88%;"></div></div>
+    <span>17 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 18 — OPTIMIZATION ROADMAP
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Roadmap</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Optimization Opportunities</div><div class="slide-num">18 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:16px;">
+
+    <div style="flex:1;display:flex;flex-direction:column;gap:7px;">
+      <h2 class="section-heading"><span class="ico">🛠️</span>Optimization Opportunities</h2>
+
+      <div class="opt-pill blue">
+        <div class="opt-icon" style="background:rgba(47,128,237,.2);">🔄</div>
+        <div class="opt-body">
+          <h4>① Layer Architecture — Replace Pointwise 1×1</h4>
+          <p>Pointwise convolutions generate enormous output activations (64×64×32 = 131K values). Replace with <strong>grouped convolutions</strong> or use <strong>output striding</strong> to reduce activation size and RAM pressure. Consider MobileNetV3-style Squeeze-and-Excite blocks instead.</p>
+        </div>
+      </div>
+
+      <div class="opt-pill green">
+        <div class="opt-icon" style="background:rgba(39,174,96,.2);">📐</div>
+        <div class="opt-body">
+          <h4>② Input Resolution Reduction</h4>
+          <p>All benchmarks use a 64×64×3 input. Reducing to 32×32 would cut activation tensors by 4× — bringing even 7×7 convolutions within single-epoch range and enabling v4.0 success.</p>
+        </div>
+      </div>
+
+      <div class="opt-pill" style="border:1px solid var(--border);">
+        <div class="opt-icon" style="background:rgba(241,196,15,.2);">⚙️</div>
+        <div class="opt-body">
+          <h4>③ Compiler Tuning — AI Core v4.0 Epoch Controller</h4>
+          <p>Investigate <code>--epoch-controller</code> CLI flags in ST Edge AI Core v4.0 to explicitly set epoch boundaries for the 7×7 case. The v2.2 compiler handles 4-epoch tiling successfully — this should be replicable in v4.0.</p>
+        </div>
+      </div>
+
+      <div class="opt-pill" style="border:1px solid var(--border);">
+        <div class="opt-icon" style="background:rgba(88,196,220,.2);">🔗</div>
+        <div class="opt-body">
+          <h4>④ Operator Fusion — Conv + MaxPool</h4>
+          <p>The Conv2D + MaxPool benchmark already demonstrates NPU operator fusion (same latency as standalone Conv2D 16f 3×3: 0.079–0.088 ms). Extend fusion to <strong>Conv → BN → ReLU</strong> chains to amortise overhead and reduce memory round-trips.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1;display:flex;flex-direction:column;gap:7px;padding-top:38px;">
+
+      <div class="opt-pill" style="border:1px solid var(--border);">
+        <div class="opt-icon" style="background:rgba(204,121,167,.2);">📦</div>
+        <div class="opt-body">
+          <h4>⑤ Depthwise Memory Alignment Fix</h4>
+          <p>The compiler doubles RAM for Depthwise 3×3 due to weight repacking for NPU vector alignment. Use compiler flags to enforce <strong>aligned weight layouts at export time</strong> (e.g. in ONNX export) to avoid the repacking step and halve its RAM usage.</p>
+        </div>
+      </div>
+
+      <div class="opt-pill" style="border:1px solid var(--border);">
+        <div class="opt-icon" style="background:rgba(231,76,60,.2);">📊</div>
+        <div class="opt-body">
+          <h4>⑥ Static Estimation Improvement</h4>
+          <p>RAM predictions for memory-bound layers (1×1, depthwise) are inaccurate by up to +1050%. Work with the ST toolchain to improve static analysis by accounting for output activation size and weight alignment padding during the estimation phase.</p>
+        </div>
+      </div>
+
+      <div class="opt-pill" style="border:1px solid var(--border);">
+        <div class="opt-icon" style="background:rgba(88,196,220,.2);">🏗️</div>
+        <div class="opt-body">
+          <h4>⑦ Architecture-Aware Design — NPU-Friendly Models</h4>
+          <p>Prefer NPU "sweet-spot" operators: <strong>standard Conv2D 3×3/5×5 with ≤64 filters</strong>. These deliver single-epoch execution, accurate estimates, and near-peak throughput. Depthwise separable convolutions need special attention to avoid the memory-boundedness trap.</p>
+        </div>
+      </div>
+
+      <div class="opt-pill" style="border:1px solid var(--border);">
+        <div class="opt-icon" style="background:rgba(47,128,237,.2);">🔬</div>
+        <div class="opt-body">
+          <h4>⑧ Extended Benchmarking</h4>
+          <p>Extend tests to: <strong>multi-layer networks</strong> (fusion effects), <strong>FP16/mixed precision</strong>, varying batch sizes, and the Cortex-M55 Helium baseline — to fully characterise the NPU vs. CPU trade-off space.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:84%;"></div></div>
+    <span>18 / 19</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SLIDE 19 — CONCLUSIONS
+══════════════════════════════════════════════════════════ -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="slide-header">
+    <div class="logo-area"><span class="chip-badge">STM32N657</span><span class="section-label">Conclusions</span></div>
+    <div style="text-align:right;"><div class="slide-title-top">Conclusions</div><div class="slide-num">19 / 19</div></div>
+  </div>
+  <div class="slide-body" style="flex-direction:row;gap:20px;">
+    <div style="flex:1.1;display:flex;flex-direction:column;gap:10px;">
+      <h2 class="section-heading"><span class="ico">✅</span>Conclusions & Contributions</h2>
+
+      <div class="card blue" style="padding:14px;">
+        <h3 style="color:var(--blue);margin-bottom:6px;">What Was Achieved</h3>
+        <ul class="blist">
+          <li>Characterised <strong>8 fundamental deep learning operators</strong> on the STM32N657 Neural-ART™ NPU across 4 platform configurations.</li>
+          <li>Quantified the <strong>compiler generation gap</strong>: AI Core v2.2 consistently outperforms v4.0 on the Nucleo board for most operators tested.</li>
+          <li>Identified the <strong>1.5 MB SRAM wall</strong> as the primary physical constraint for single-layer deployment, causing FAIL on v4.0 for the 7×7 operator.</li>
+          <li>Exposed <strong>RAM estimation inaccuracies</strong> of up to +1050% for memory-bound operators (1×1 pointwise) — critical for safe system design.</li>
+          <li>Demonstrated that <strong>Flash footprint is compiler-independent</strong> and determined solely by model quantization.</li>
+        </ul>
+      </div>
+
+      <div class="card green" style="padding:14px;">
+        <h3 style="color:var(--green);margin-bottom:6px;">Practical Guidelines for STM32N657 Deployment</h3>
+        <ul class="blist">
+          <li>Prefer <strong>standard Conv2D 3×3–5×5</strong> with ≤64 filters: single-epoch, predictable, high throughput.</li>
+          <li>Use <strong>CubeMX/X-CUBE-AI (AI Core v2.2)</strong> as the reference compiler — most reliable and fastest for production.</li>
+          <li>Avoid operators with activation tensors &gt; 1.4 MB to prevent epoch proliferation or runtime failure.</li>
+          <li>Apply <strong>operator fusion</strong> (Conv+Pool, Conv+BN+ReLU) to reduce memory round-trips.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="flex:0.9;display:flex;flex-direction:column;gap:10px;justify-content:center;">
+      <div class="grid-2" style="gap:10px;">
+        <div class="kpi card" style="padding:16px;">
+          <div class="val green-g">8/8</div>
+          <div class="lbl">Operators on CubeMX v2.2</div>
+        </div>
+        <div class="kpi card" style="padding:16px;">
+          <div class="val red-g">7/8</div>
+          <div class="lbl">Operators on AI Studio v4.0</div>
+        </div>
+        <div class="kpi card" style="padding:16px;">
+          <div class="val" style="font-size:22px;">0.031</div>
+          <div class="lbl">Best latency (ms)<br/>DW 3×3 on DK v4.0</div>
+        </div>
+        <div class="kpi card" style="padding:16px;">
+          <div class="val orange-g">~3 TOPS/W</div>
+          <div class="lbl">NPU efficiency<br/>Neural-ART™</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:4px;">
+        <p style="font-size:11px;color:var(--text2);">Matteo Miglio · Matricola 243947</p>
+        <p style="font-size:11px;color:var(--text2);">DISI – University of Trento · A.Y. 2025/2026</p>
+        <p style="font-size:11px;color:var(--text2);">Supervisors: Prof. Vella, Prof. Yildirim</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>NPU Benchmark · STM32N657</span>
+    <div class="prog-bar"><div class="prog-fill" style="width:90%;"></div></div>
+    <span>19 / 19</span>
+  </div>
+</div>
+
+</body>
+</html>

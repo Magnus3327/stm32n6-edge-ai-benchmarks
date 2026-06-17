@@ -1,0 +1,75 @@
+{
+  "aton_execution_time": [
+    {
+      "counters": [
+        1921,
+        11843,
+        794
+      ],
+      "cycles": 14559,
+      "cycles_by_macc": 0,
+      "duration_ms": 0.01819912511855364,
+      "percentage": 42.83822757510684
+    },
+    {
+      "counters": [
+        5689,
+        11210,
+        2527
+      ],
+      "cycles": 19427,
+      "cycles_by_macc": 0,
+      "duration_ms": 0.02428425047546625,
+      "percentage": 57.16177242489315
+    }
+  ],
+  "environment": {
+    "device": "stm32 family - 0x486 - STM32N6xx @800/400MHz",
+    "generated_model": {
+      "generated_time": "2026-05-30T12:21:12+0200",
+      "name": "network"
+    },
+    "network_signature": "0x1ecd14f364f8ade8",
+    "test_name": "",
+    "tools": [
+      {
+        "arguments": "validate --target stm32n6 --name network -m /Users/matteo/Universita/Tirocinio/Baseline Performance/Modelli/Modelli/baseline_depthwise_3x3_int8.tflite --st-neural-art n6-extflash@/Users/matteo/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.2.0/scripts/N6_scripts/user_neuralart.json --workspace /var/folders/qn/y4fdcgw97jsbxdyb6s0d79680000gn/T/mxAI_workspace193281776765836414247912477746458 --output /Users/matteo/.stm32cubemx/network_output --mode target --desc serial:921600",
+        "environment": [
+          "STATS_TYPE=X-CUBE-AI"
+        ],
+        "input_model": {
+          "model_files": [
+            {
+              "name": "baseline_depthwise_3x3_int8.tflite",
+              "signature": "0x3714b4447c89c72d70fa92b11af13498"
+            }
+          ],
+          "n_params": 30,
+          "name": "baseline_depthwise_3x3_int8",
+          "size": 39,
+          "type": "tflite"
+        },
+        "name": "ST.EdgeAI.Core",
+        "version": "2.2.0-20266 2adc00962"
+      }
+    ]
+  },
+  "json_schema_version": "2.0",
+  "validation": {
+    "val_error": 0.00013858842430636287,
+    "val_error_desc": "x-cross (rmse) #1",
+    "val_metrics": [
+      {
+        "acc": "n.a.",
+        "cos": 0.9999997615814209,
+        "desc": "X-cross #1",
+        "l2r": 0.0007791375392116606,
+        "mae": 2.530266829126049e-05,
+        "mean": -2.530266829126049e-05,
+        "nse": 0.9996518662659223,
+        "rmse": 0.00013858842430636287,
+        "std": 0.00013858842430636287
+      }
+    ]
+  }
+}

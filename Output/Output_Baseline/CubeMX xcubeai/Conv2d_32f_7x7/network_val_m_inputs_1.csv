@@ -1,0 +1,5 @@
+# file created : 2026-05-30 12:15:49
+# dtype=int8
+# original model features - 10/10
+# (10, 64, 64, 3)/int8, min/max=[-128, 127], mean/std=[-0.622835, 73.566782], serving_default_keras_tensor_220
+# Note: w/o data, number of item by sample is exceeded: 12288 > 512

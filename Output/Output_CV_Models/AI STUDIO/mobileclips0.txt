@@ -1,0 +1,255 @@
+image
+
+
+
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-17 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-17\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: INTERNAL ERROR: Exported ONNX could be malformed since ONNX shape inference fails. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+INTERNAL ERROR: Exported ONNX could be malformed since ONNX shape inference fails
+ 
+
+
+text
+
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-19 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-19\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: NOT IMPLEMENTED: Unkonwn layer format for layer Input_72. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]WARNING: layer_norm_Reduce is not quantized
+WARNING: layer_norm_Sub is not quantized
+WARNING: layer_norm_Mul is not quantized
+WARNING: layer_norm_Reduce_1 is not quantized
+WARNING: layer_norm_Add is not quantized
+WARNING: layer_norm_Sqrt is not quantized
+WARNING: layer_norm_Reciprocal is not quantized
+WARNING: layer_norm_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_Mul_2 is not quantized
+WARNING: layer_norm_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_1_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_1_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_1_Mul is not quantized
+WARNING: layer_norm_1_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_1_Add is not quantized
+
+                                                      
+WARNING: layer_norm_1_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_1_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_1_Mul_1 is not quantized
+
+                                                      WARNING: layer_norm_1_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_1_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_2_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_2_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_2_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_2_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_2_Add is not quantized
+
+                                                      
+WARNING: layer_norm_2_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_2_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_2_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_2_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_2_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_3_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_3_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_3_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_3_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_3_Add is not quantized
+
+                                                      
+WARNING: layer_norm_3_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_3_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_3_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_3_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_3_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_4_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_4_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_4_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_4_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_4_Add is not quantized
+
+                                                      
+WARNING: layer_norm_4_Sqrt is not quantized
+WARNING: layer_norm_4_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_4_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_4_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_4_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_5_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_5_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_5_Mul is not quantized
+WARNING: layer_norm_5_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_5_Add is not quantized
+
+                                                      
+WARNING: layer_norm_5_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_5_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_5_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_5_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_5_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_6_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_6_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_6_Mul is not quantized
+WARNING: layer_norm_6_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_6_Add is not quantized
+
+                                                      
+WARNING: layer_norm_6_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_6_Reciprocal is not quantized
+WARNING: layer_norm_6_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_6_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_6_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_7_Reduce is not quantized
+WARNING: layer_norm_7_Sub is not quantized
+WARNING: layer_norm_7_Mul is not quantized
+WARNING: layer_norm_7_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_7_Add is not quantized
+
+                                                      
+WARNING: layer_norm_7_Sqrt is not quantized
+WARNING: layer_norm_7_Reciprocal is not quantized
+WARNING: layer_norm_7_Mul_1 is not quantized
+WARNING: layer_norm_7_Mul_2 is not quantized
+WARNING: layer_norm_7_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_8_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_8_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_8_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_8_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_8_Add is not quantized
+
+                                                      
+WARNING: layer_norm_8_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_8_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_8_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_8_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_8_Add_1 is not quantized
+
+                                                      
+
+NOT IMPLEMENTED: Unkonwn layer format for layer Input_72
+ 

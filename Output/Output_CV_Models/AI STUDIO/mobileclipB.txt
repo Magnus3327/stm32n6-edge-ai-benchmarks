@@ -1,0 +1,26 @@
+image
+
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-18 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-18\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: TOOL ERROR: list index out of range. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+TOOL ERROR: list index out of range
+
+
+text
+
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-20 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-20\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: E010(InvalidModelError): Non-numerical or not-string elements in unsqueeze_11_DequantizeLinear_Output_const's parameter out_0. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+E010(InvalidModelError): Non-numerical or not-string elements in unsqueeze_11_DequantizeLinear_Output_const's parameter out_0
+ 
+
