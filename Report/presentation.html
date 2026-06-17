@@ -12,11 +12,26 @@
 @page {
   size: A4 landscape;
   margin: 0;
+  background: #0d1117;
+}
+
+@media print {
+  html, body {
+    background: #0d1117 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .slide {
+    background: #0d1117 !important;
+  }
 }
 
 /* ── Reset ────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 14px; }
+html {
+  font-size: 14px;
+  background: #0d1117;
+}
 body {
   font-family: 'Inter', sans-serif;
   background: #0d1117;
@@ -112,11 +127,16 @@ h1.slide-main-title {
   font-size: 36px;
   font-weight: 800;
   line-height: 1.15;
+  width: fit-content; /* Sostituisce display: inline-block per evitare il bug */
   background: linear-gradient(135deg, #ffffff 30%, var(--cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone; /* Forza il ricalcolo del gradiente su ogni singola riga */
+  box-decoration-break: clone;
 }
+
 h2.section-heading {
   font-size: 21px;
   font-weight: 700;
@@ -158,10 +178,12 @@ p  { font-size: 12px; color: var(--text3); line-height: 1.55; }
   font-size: 26px;
   font-weight: 800;
   font-family: 'JetBrains Mono', monospace;
+  display: inline-block;
   background: linear-gradient(135deg, var(--cyan), var(--blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 .kpi .val.green-g {
   background: linear-gradient(135deg, var(--green), #1abc9c);
@@ -254,11 +276,11 @@ table.ptable td.mono { font-family: 'JetBrains Mono', monospace; font-size: 11px
   background: radial-gradient(ellipse at 70% 40%, rgba(47,128,237,.15) 0%, transparent 60%),
               radial-gradient(ellipse at 20% 80%, rgba(39,174,96,.1) 0%, transparent 50%),
               #0d1117;
-  justify-content: center;
 }
 .title-slide .slide-body {
   justify-content: center;
   padding: 28px 48px;
+  flex: 1;
 }
 
 /* ── Optimization pill ────────────────────────────────── */
