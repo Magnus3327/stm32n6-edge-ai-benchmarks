@@ -123,7 +123,7 @@ Before compilation, the following patches were applied to the ONNX graphs:
 
 ## Golden Path — Successful Real-World Deployment
 
-**MobileNetV2 @ 224×224** was successfully compiled and measured on the **STM32N6570-DK** board using **CubeMX v2.2**:
+**MobileNetV2 @ 224×224** was successfully compiled and measured on the Nucleo board using **CubeMX ai core v2.2**:
 
 | Metric | Value |
 |--------|-------|
