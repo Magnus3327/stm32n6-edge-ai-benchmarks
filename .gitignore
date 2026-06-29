@@ -1,6 +1,7 @@
 # Virtual environments
 venv/
 .venv/
+.venv_tf/
 env/
 .env/
 .venv_pdf/
@@ -21,6 +22,22 @@ __pycache__/
 # Report/plot/
 # Output/plot/
 
-# Exported Models
-Models/exported/
-Models/.cache
+# Model files — tutti > 100 MB, non caricabili su GitHub
+# Rigenera con: source .venv/bin/activate && python Models/scripts/export_models.py
+Models/.cache/
+Models/0_validated/fp32/*.onnx
+Models/0_validated/fp32/*.onnx.data
+Models/0_validated/int8/*.onnx
+Models/1_ram_fail/fp32/*.onnx
+Models/1_ram_fail/fp32/*.onnx.data
+Models/1_ram_fail/int8/*.onnx
+Models/1_ram_fail/int4/*.onnx
+Models/2_transformer_fail/fp32/*.onnx
+Models/2_transformer_fail/int8/*.onnx
+Models/2_transformer_fail/tflite/*.tflite
+Models/3_baseline/conv/*.tflite
+Models/3_baseline/transformer/*.onnx
+
+# Pesi PyTorch (.pth) e TFLite generati
+*.pth
+*.safetensors
