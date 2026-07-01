@@ -19,17 +19,17 @@ fi
 # nome  ->  path assoluto
 declare -a MODELS=(
   # CNN INT8 ONNX (CV_Models: yolo@640, resnet34@224, pidnet@2048x1024, rtmdet@640)
-  "yolov7_int8|$PRES/Models/1_ram_fail/int8/yolov7_int8.onnx"
-  "resnet34_int8|$PRES/Models/1_ram_fail/int8/resnet34_fixed_int8.onnx"
-  "pidnet_s_int8|$PRES/Models/1_ram_fail/int8/pidnet_s_int8.onnx"
-  "rtmdet_l_int8|$PRES/Models/1_ram_fail/int8/rtmdet_l_int8.onnx"
+  "yolov7_int8|$BASE/Models/1_ram_fail/int8/yolov7_int8.onnx"
+  "resnet34_int8|$BASE/Models/1_ram_fail/int8/resnet34_fixed_int8.onnx"
+  "pidnet_s_int8|$BASE/Models/1_ram_fail/int8/pidnet_s_int8.onnx"
+  "rtmdet_l_int8|$BASE/Models/1_ram_fail/int8/rtmdet_l_int8.onnx"
   "rtmdet_l_int8_nonms|$BASE/Models/1_ram_fail/rtmdet_l_int8_nonms.onnx"
-  "yolov8n_int8|$PRES/Models/1_ram_fail/int8/yolov8n_int8.onnx"
-  "yolov11n_int8|$PRES/Models/1_ram_fail/int8/yolov11n_int8.onnx"
-  "yolov11s_int8|$PRES/Models/1_ram_fail/int8/yolov11s_int8.onnx"
-  "yolov11m_int8|$PRES/Models/1_ram_fail/int8/yolov11m_int8.onnx"
-  "yolov11l_int8|$PRES/Models/1_ram_fail/int8/yolov11l_int8.onnx"
-  "yolov11x_int8|$PRES/Models/1_ram_fail/int8/yolov11x_int8.onnx"
+  "yolov8n_int8|$BASE/Models/1_ram_fail/int8/yolov8n_int8.onnx"
+  "yolov11n_int8|$BASE/Models/1_ram_fail/int8/yolov11n_int8.onnx"
+  "yolov11s_int8|$BASE/Models/1_ram_fail/int8/yolov11s_int8.onnx"
+  "yolov11m_int8|$BASE/Models/1_ram_fail/int8/yolov11m_int8.onnx"
+  "yolov11l_int8|$BASE/Models/1_ram_fail/int8/yolov11l_int8.onnx"
+  "yolov11x_int8|$BASE/Models/1_ram_fail/int8/yolov11x_int8.onnx"
   # Transformer TFLite NATIVO (litert-torch)
   "mobileclip_s0_img_tfl|$BASE/tflite_native/mobileclip_s0_image_int8.tflite"
   "mobileclip_b_img_tfl|$BASE/tflite_native/mobileclip_b_image_int8.tflite"
