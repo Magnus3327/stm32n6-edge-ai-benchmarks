@@ -1,6 +1,7 @@
 # Virtual environments
 venv/
 .venv/
+.venv312/
 .venv_tf/
 env/
 .env/
@@ -18,26 +19,35 @@ __pycache__/
 # macOS
 .DS_Store
 
+# Build/workspace artifacts (stedgeai CLI locale)
+st_ai_ws/
+/tmp/
+
 # Temporary files or output plots if you don't want to track them (optional, uncomment to activate)
 # Report/plot/
 # Output/plot/
 
-# Model files — tutti > 100 MB, non caricabili su GitHub
+# Model files — tutti > 100 MB o comunque non caricabili su GitHub.
 # Rigenera con: source .venv/bin/activate && python Models/scripts/export_models.py
-Models/.cache/
-Models/0_validated/fp32/*.onnx
-Models/0_validated/fp32/*.onnx.data
-Models/0_validated/int8/*.onnx
-Models/1_ram_fail/fp32/*.onnx
-Models/1_ram_fail/fp32/*.onnx.data
-Models/1_ram_fail/int8/*.onnx
-Models/1_ram_fail/int4/*.onnx
-Models/2_transformer_fail/fp32/*.onnx
-Models/2_transformer_fail/int8/*.onnx
-Models/2_transformer_fail/tflite/*.tflite
-Models/3_baseline/conv/*.tflite
-Models/3_baseline/transformer/*.onnx
+**/Models/.cache/
+**/Models/0_validated/fp32/*.onnx
+**/Models/0_validated/fp32/*.onnx.data
+**/Models/0_validated/int8/*.onnx
+**/Models/1_ram_fail/fp32/*.onnx
+**/Models/1_ram_fail/fp32/*.onnx.data
+**/Models/1_ram_fail/int8/*.onnx
+**/Models/1_ram_fail/int4/*.onnx
+**/Models/1_ram_fail/tflite_native/*.tflite
+**/Models/2_transformer_fail/fp32/*.onnx
+**/Models/2_transformer_fail/int8/*.onnx
+**/Models/2_transformer_fail/tflite/*.tflite
+**/Models/3_baseline/conv/*.tflite
+**/Models/3_baseline/transformer/*.onnx
+**/Models/Test_v4.0.1/to_windows/**/*.onnx
+**/Models/Test_v4.0.1/to_windows/**/*.tflite
+tflite_native/*.tflite
 
-# Pesi PyTorch (.pth) e TFLite generati
+# Pesi pre-addestrati scaricati (ultralytics, ecc.) — mai committare
+*.pt
 *.pth
 *.safetensors
