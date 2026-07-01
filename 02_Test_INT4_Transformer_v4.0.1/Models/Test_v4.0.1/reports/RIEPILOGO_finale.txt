@@ -1,0 +1,104 @@
+RIEPILOGO FINALE — Campagna v4.0.1 (STM32N657 / ST Edge AI Core 4.0.1-20581)
+============================================================================
+
+>>> LETTURA CHIAVE: gli errori NON sono tutti uguali. Vanno divisi in due categorie:
+    (A) PROBLEMI DI EXPORT/TOOLING  -> NON sono limiti dell'hardware, sono artefatti
+        della pipeline di conversione. Vanno ESCLUSI dalle conclusioni negative.
+    (B) LIMITI REALI HW/COMPILER    -> QUESTO e' il contenuto scientifico della tesi.
+
+============================================================================
+FASE 1 — INT4 (10 modelli)
+============================================================================
+| modello            | errore ST                              | categoria          |
+|--------------------|----------------------------------------|--------------------|
+| pidnet_s_int4      | E103 NeuralArt, 32MB unallocated       | (A) com.microsoft  |
+| resnet34_int4      | NOT IMPL: allowzero != default Reshape | (A) EXPORT BUG     |
+| rtmdet_l_int4      | NOT IMPL: NonMaxSuppression            | (A) EXPORT BUG     |
+| yolov7_int4        | NOT IMPL: allowzero != default Reshape | (A) EXPORT BUG     |
+| yolov8n_int4       | Model does not fit. RAM too low        | (B) RAM            |
+| yolov11n_int4      | RAM too low                            | (B) RAM            |
+| yolov11s_int4      | RAM too low                            | (B) RAM            |
+| yolov11m_int4      | RAM too low                            | (B) RAM            |
+| yolov11l_int4      | RAM too low                            | (B) RAM            |
+| yolov11x_int4      | RAM too low                            | (B) RAM            |
+
+CONCLUSIONE INT4: confermato che NON risolve la RAM (quantizza solo i pesi, non le
+attivazioni). Gli YOLO vanno in RAM fail identico all'INT8. resnet34/yolov7/rtmdet
+falliscono PRIMA, per bug di export (l'INT4 e' stato rigenerato dall'FP32 col bug
+allowzero/NMS, non dall'INT8 pulito). => INT4 = vicolo cieco documentato. OK per tesi.
+
+============================================================================
+FASE 1 — YOLO TFLite native @640 (6 modelli, pipeline onnx2tf)
+============================================================================
+TUTTI: TOOL ERROR "operands could not be broadcast (N,3,3,3) (3,1,1,1)"
+       + "WARNING: <ogni layer> is not quantized"
+=> categoria (A) ARTEFATTO onnx2tf: la conversione inserisce una normalizzazione input
+   (3,1,1,1) che ST non ingerisce, e non applica bene la quantizzazione.
+   NON e' un test valido del limite hardware. Da rifare con export TFLite NATIVO
+   ultralytics (format="tflite", int8=True) SE si vuole un grafo pulito.
+   MA: sappiamo gia' dall'INT8 ONNX (presentazione) che YOLO@640 = RAM fail.
+   Quindi un tflite pulito confermerebbe solo il limite RAM (B), non lo risolve.
+
+============================================================================
+FASE 2 — Transformer ONNX INT8 (6 modelli)
+============================================================================
+| modello              | errore ST                                    | categoria    |
+|----------------------|----------------------------------------------|--------------|
+| mobileclip_s0_image  | INTERNAL: ONNX malformed (shape inf fails)   | (A) EXPORT   |
+| mobileclip_s0_text   | NOT IMPL: Unknown layer format Input_72      | (A) EXPORT   |
+| mobileclip_b_image   | TOOL ERROR: list index out of range          | (A) EXPORT   |
+| mobileclip_b_text    | E010: Non-numerical elements (unsqueeze)     | (A) EXPORT   |
+| uniformer_small      | Model does not fit. RAM too low              | (B) RAM      |
+| uniformer_base       | E103 NeuralArt + LayerNorm DECOMPOSTO        | (A)+(B)      |
+NOTA: in tutti gli ONNX il LayerNorm e' DECOMPOSTO in Reduce/Sub/Mul/Sqrt/Reciprocal
+(tutti "not quantized"). L'ONNX NON usa l'operatore LayerNormalization nativo, quindi
+il supporto aggiunto in ST 4.0.x NON viene attivato. => export sbagliato, non HW.
+
+============================================================================
+FASE 2 — Transformer TFLite NATIVO (4 modelli, litert-torch PyTorch->TFLite) *** ***
+============================================================================
+| modello              | errore ST                                    | categoria    |
+|----------------------|----------------------------------------------|--------------|
+| mobileclip_s0_image  | NOT IMPL: Slice on batch dimension           | (B) COMPILER |
+| mobileclip_b_image   | NOT IMPL: Slice on more than 3 dimensions    | (B) COMPILER |
+| uniformer_small      | NOT IMPL: Slice on batch dimension           | (B) COMPILER |
+| uniformer_base       | NOT IMPL: Slice on batch dimension           | (B) COMPILER |
+
+*** RISULTATO PIU' IMPORTANTE DELLA CAMPAGNA ***
+Il TFLite NATIVO ha PULITO il grafo: spariti "malformed", "list index", LayerNorm
+decomposto. I 6 errori casuali dell'ONNX sono COLLASSATI in UN SOLO errore preciso e
+ripetibile: "Slice on batch dimension not supported".
+=> Questo e' il VERO muro del compiler ST 4.0.1 sull'attention: un pattern di slicing
+   sulla dimensione batch/>3D che la NPU non mappa. Ben definito, citabile, segnalabile
+   a ST. NON e' "i transformer non funzionano": e' "manca il supporto a UN op pattern".
+
+============================================================================
+FASE 3 — baseline_transformer_block
+============================================================================
+INTERNAL ERROR: 'NoneType' object is not subscriptable
+=> (B) CRASH INTERNO del compiler. Gli operatori singoli (softmax, layernorm, mha,
+   dense) passano; il blocco combinato fa crashare il tool. Bug ST da segnalare.
+
+============================================================================
+VERDETTO
+============================================================================
+NON e' un fallimento: e' una CARATTERIZZAZIONE. La tesi cambia taglio da "far girare
+i modelli" a "mappare i limiti dell'NPU e separare tooling da hardware".
+
+Limiti REALI dimostrati (contenuto tesi):
+1. RAM 1.5MB npuRAM: insufficiente per attivazioni di YOLO@640 e uniformer@224.
+   INT4 non aiuta (weight-only). Leve reali: risoluzione input o architettura.
+2. Compiler 4.0.1: gap preciso sull'attention = "Slice on batch dimension".
+3. Blocco transformer completo: crash interno del compiler.
+
+Artefatti di tooling (da NON confondere coi limiti HW):
+- allowzero (resnet34/yolov7), NMS (rtmdet), onnx2tf (yolo tflite), LayerNorm
+  decomposto + shape dinamiche (transformer ONNX).
+
+PROSSIMI PASSI OPZIONALI (se vuoi rafforzare, non obbligatori):
+- Curva RAM vs risoluzione: testare YOLO/uniformer a 320 e 224 per trovare la soglia
+  esatta a cui entrano in npuRAM. => risultato quantitativo forte.
+- Transformer: provare export che evita lo slice sul batch (fissare batch, riscrivere
+  l'attention). Model surgery, opzionale.
+- YOLO tflite: rigenerare con export nativo ultralytics per confermare che il residuo
+  e' solo RAM (atteso).

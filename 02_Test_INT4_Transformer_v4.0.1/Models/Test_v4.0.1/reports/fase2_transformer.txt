@@ -1,0 +1,1977 @@
+FASE 2 — TRANSFORMER — ONNX INT8 + TFLite nativo
+AI Core: 4.0.1-20581   Board: ______   Data: ______
+============================================================
+
+NOTA: i TFLite via onnx2tf (vecchi) sono ESCLUSI — già noto che falliscono per la stessa
+ragione dell'ONNX (LayerNorm decomposto, shape dinamiche). Sono stati rimossi da to_windows.
+Qui si testano: ONNX INT8 (con --expand-softmax) + TFLite NATIVI (PyTorch -> TFLite diretto).
+
+Per ONNX: provare sia senza che con il flag --expand-softmax (nuovo in 4.0.1).
+
+
+--- ONNX INT8 ---
+
+[ mobileclip_s0_image_int8.onnx ]
+    esito senza flag:  ______   con --expand-softmax: ______
+    RAM att (MB): ______   epoch (HW/SW/tot): ______   latenza (ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-70 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-70\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: INTERNAL ERROR: Exported ONNX could be malformed since ONNX shape inference fails. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+INTERNAL ERROR: Exported ONNX could be malformed since ONNX shape inference fails
+ 
+
+
+[ mobileclip_s0_text_int8.onnx  ]
+    esito senza flag:  ______   con --expand-softmax: ______
+    RAM att (MB): ______   epoch (HW/SW/tot): ______   latenza (ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-71 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-71\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: NOT IMPLEMENTED: Unkonwn layer format for layer Input_72. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+WARNING: layer_norm_Reduce is not quantized
+WARNING: layer_norm_Sub is not quantized
+WARNING: layer_norm_Mul is not quantized
+WARNING: layer_norm_Reduce_1 is not quantized
+WARNING: layer_norm_Add is not quantized
+WARNING: layer_norm_Sqrt is not quantized
+WARNING: layer_norm_Reciprocal is not quantized
+WARNING: layer_norm_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_Mul_2 is not quantized
+WARNING: layer_norm_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_1_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_1_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_1_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_1_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_1_Add is not quantized
+WARNING: layer_norm_1_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_1_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_1_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_1_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_1_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_2_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_2_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_2_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_2_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_2_Add is not quantized
+
+                                                      
+WARNING: layer_norm_2_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_2_Reciprocal is not quantized
+WARNING: layer_norm_2_Mul_1 is not quantized
+WARNING: layer_norm_2_Mul_2 is not quantized
+WARNING: layer_norm_2_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_3_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_3_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_3_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_3_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_3_Add is not quantized
+
+                                                      
+WARNING: layer_norm_3_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_3_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_3_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_3_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_3_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_4_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_4_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_4_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_4_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_4_Add is not quantized
+
+                                                      
+WARNING: layer_norm_4_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_4_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_4_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_4_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_4_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_5_Reduce is not quantized
+WARNING: layer_norm_5_Sub is not quantized
+WARNING: layer_norm_5_Mul is not quantized
+WARNING: layer_norm_5_Reduce_1 is not quantized
+WARNING: layer_norm_5_Add is not quantized
+WARNING: layer_norm_5_Sqrt is not quantized
+WARNING: layer_norm_5_Reciprocal is not quantized
+WARNING: layer_norm_5_Mul_1 is not quantized
+WARNING: layer_norm_5_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_5_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_6_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_6_Sub is not quantized
+
+                                                      
+WARNING: layer_norm_6_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_6_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_6_Add is not quantized
+
+                                                      
+WARNING: layer_norm_6_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_6_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_6_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_6_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_6_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_7_Reduce is not quantized
+WARNING: layer_norm_7_Sub is not quantized
+WARNING: layer_norm_7_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_7_Reduce_1 is not quantized
+WARNING: layer_norm_7_Add is not quantized
+
+                                                      
+WARNING: layer_norm_7_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_7_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_7_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_7_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_7_Add_1 is not quantized
+
+                                                      
+WARNING: layer_norm_8_Reduce is not quantized
+
+                                                      
+WARNING: layer_norm_8_Sub is not quantized
+WARNING: layer_norm_8_Mul is not quantized
+
+                                                      
+WARNING: layer_norm_8_Reduce_1 is not quantized
+
+                                                      
+WARNING: layer_norm_8_Add is not quantized
+
+                                                      
+WARNING: layer_norm_8_Sqrt is not quantized
+
+                                                      
+WARNING: layer_norm_8_Reciprocal is not quantized
+
+                                                      
+WARNING: layer_norm_8_Mul_1 is not quantized
+
+                                                      
+WARNING: layer_norm_8_Mul_2 is not quantized
+
+                                                      
+WARNING: layer_norm_8_Add_1 is not quantized
+
+                                                      
+
+NOT IMPLEMENTED: Unkonwn layer format for layer Input_72
+ 
+
+
+[ mobileclip_b_image_int8.onnx  ]
+    esito senza flag:  ______   con --expand-softmax: ______
+    RAM att (MB): ______   epoch (HW/SW/tot): ______   latenza (ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-72 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-72\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: TOOL ERROR: list index out of range. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+TOOL ERROR: list index out of range
+ 
+
+
+[ mobileclip_b_text_int8.onnx   ]
+    esito senza flag:  ______   con --expand-softmax: ______
+    RAM att (MB): ______   epoch (HW/SW/tot): ______   latenza (ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-73 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-73\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: E010(InvalidModelError): Non-numerical or not-string elements in unsqueeze_11_DequantizeLinear_Output_const's parameter out_0. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+E010(InvalidModelError): Non-numerical or not-string elements in unsqueeze_11_DequantizeLinear_Output_const's parameter out_0
+ 
+
+
+[ uniformer_small_int8.onnx     ]
+    esito senza flag:  ______   con --expand-softmax: ______
+    RAM att (MB): ______   epoch (HW/SW/tot): ______   latenza (ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-74 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-74\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: Model does not fit in Board. RAM Size too low
+
+
+[ uniformer_base_int8.onnx      ]
+    esito senza flag:  ______   con --expand-softmax: ______
+    RAM att (MB): ______   epoch (HW/SW/tot): ______   latenza (ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-75 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-75\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: E103(CliRuntimeError): Error calling the Neural Art compiler. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Reduce is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Sub is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Mul is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Reduce_1 is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Add is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Mul_2 is not quantized
+WARNING: _patch_embed1_norm_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Mul is not quantized
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Reduce_1 is not quantized
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Add is not quantized
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Mul_2 is not quantized
+WARNING: _patch_embed2_norm_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Reduce is not quantized
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Sub is not quantized
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Reduce_1 is not quantized
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Mul_2 is not quantized
+WARNING: _patch_embed3_norm_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Reduce is not quantized
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Add is not quantized
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_0_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_1_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+WARNING: _blocks3_2_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Add is not quantized
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+WARNING: _blocks3_2_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Add is not quantized
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_3_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Reduce is not quantized
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_4_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_5_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Mul is not quantized
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Add is not quantized
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_6_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_7_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_8_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_9_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+WARNING: _blocks3_10_norm1_LayerNormalization_output_0_Add_1 is not quantized
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_10_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+WARNING: _blocks3_11_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_12_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_13_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm1_LayerNormalization_output_0_Add_1 is not quantized
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Reduce is not quantized
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_14_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_15_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_16_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_17_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Reduce is not quantized
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Mul is not quantized
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_18_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks3_19_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _patch_embed4_norm_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_0_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_1_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Add is not quantized
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_2_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_3_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Reduce is not quantized
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Sub is not quantized
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_4_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_5_norm2_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Sqrt is not quantized
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Reciprocal is not quantized
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Mul_1 is not quantized
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Mul_2 is not quantized
+WARNING: _blocks4_6_norm1_LayerNormalization_output_0_Add_1 is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Reduce is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Sub is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Mul is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Reduce_1 is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Add is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Sqrt is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Reciprocal is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Mul_1 is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Mul_2 is not quantized
+
+                                                      
+WARNING: _blocks4_6_norm2_LayerNormalization_output_0_Add_1 is not quantized
+ >>>> EXECUTING NEURAL ART COMPILER
+   C:/ST/STEdgeAI/4.0/Utilities/windows/atonn.exe -i "C:/Users/matte/.stm32cubeaistudio/workspace/Baseline/.ai/run/run-75/.ai/st_ai_output/uniformer_base_int8_OE_3_3_1.onnx" --json-quant-file "C:/Users/matte/.stm32cubeaistudio/workspace/Baseline/.ai/run/run-75/.ai/st_ai_output/uniformer_base_int8_OE_3_3_1_Q.json" -g "network.c" --load-mdesc "C:/ST/STEdgeAI/4.0/Utilities/configs/stm32n6.mdesc" --load-mpool "C:/Users/matte/.stm32cubeaistudio/workspace/Baseline/.ai/run/run-75/.ai/memory_pool.mpool" --load-cdesc C:/ST/STEdgeAI/4.0/Utilities/configs/cortex-m55.cdesc --save-mpool-file "C:/Users/matte/.stm32cubeaistudio/workspace/Baseline/.ai/run/run-75/.ai/st_ai_ws/neural_art__network/memory_pool.mpool" --out-dir-prefix "C:/Users/matte/.stm32cubeaistudio/workspace/Baseline/.ai/run/run-75/.ai/st_ai_ws/neural_art__network/" --network-name "network" --native-float --cache-maintenance --Ocache-opt --enable-virtual-mem-pools --Os --Oauto-sched --enable-epoch-controller --output-info-file "c_info.json" --generate-stai
+
+                                                      
+      >>> Shell execution has FAILED (returned code = 1)
+      $ C:\ST\STEdgeAI\4.0\Utilities\windows\atonn.exe -i C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-75\.ai\st_ai_output\uniformer_base_int8_OE_3_3_1.onnx --json-quant-file C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-75\.ai\st_ai_output\uniformer_base_int8_OE_3_3_1_Q.json -g network.c --load-mdesc C:\ST\STEdgeAI\4.0\Utilities\configs\stm32n6.mdesc --load-mpool C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-75\.ai\memory_pool.mpool --load-cdesc C:\ST\STEdgeAI\4.0\Utilities\configs\cortex-m55.cdesc --save-mpool-file C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-75\.ai\st_ai_ws\neural_art__network\memory_pool.mpool --out-dir-prefix C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-75\.ai\st_ai_ws\neural_art__network/ --network-name network --native-float --cache-maintenance --Ocache-opt --enable-virtual-mem-pools --Os --Oauto-sched --enable-epoch-controller --output-info-file c_info.json --generate-stai
+      saving memory pool description "C:/Users/matte/.stm32cubeaistudio/workspace/Baseline/.ai/run/run-75/.ai/st_ai_ws/neural_art__network/memory_pool.mpool"
+      Warning: Oauto did not find valid compile options: aborting
+      Configuration 0: alt-scheduler(false):
+      total bytes left unallocated=31084544
+      Configuration 1: alt-scheduler(true):
+      total bytes left unallocated=16666624
+      <<<
+
+   
+   E103(CliRuntimeError): Error calling the Neural Art compiler
+ 
+
+
+--- TFLITE NATIVO (PyTorch -> TFLite diretto via ai-edge-torch) ---
+Export eseguito su macOS con conda Python 3.12 + ai-edge-torch.
+Grafo pulito: LayerNorm e MHA rimangono come operatori interi (non decomposed).
+
+[ mobileclip_s0_image_int8.tflite ]
+    esito: ______  RAM att (MB): ______  epoch(HW/SW/tot): ______  latenza(ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-76 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-76\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: NOT IMPLEMENTED: Slice on batch dimension not supported. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+NOT IMPLEMENTED: Slice on batch dimension not supported
+ 
+
+
+[ mobileclip_b_image_int8.tflite  ]
+    esito: ______  RAM att (MB): ______  epoch(HW/SW/tot): ______  latenza(ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-77 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-77\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: NOT IMPLEMENTED: Slice on more than 3 dimensions is not supported. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+NOT IMPLEMENTED: Slice on more than 3 dimensions is not supported
+ 
+
+
+[ uniformer_small_int8.tflite     ]
+    esito: ______  RAM att (MB): ______  epoch(HW/SW/tot): ______  latenza(ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-78 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-78\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: NOT IMPLEMENTED: Slice on batch dimension not supported. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+NOT IMPLEMENTED: Slice on batch dimension not supported
+ 
+
+
+[ uniformer_base_int8.tflite      ]
+    esito: ______  RAM att (MB): ______  epoch(HW/SW/tot): ______  latenza(ms): ______
+    errore:
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-79 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-79\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: NOT IMPLEMENTED: Slice on batch dimension not supported. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+NOT IMPLEMENTED: Slice on batch dimension not supported
+ 

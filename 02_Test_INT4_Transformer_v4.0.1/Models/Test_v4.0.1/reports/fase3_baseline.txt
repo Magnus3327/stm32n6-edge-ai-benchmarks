@@ -1,0 +1,29 @@
+FASE 3 — BASELINE OPERATORI TRANSFORMER
+AI Core: 4.0.1-20581   Board: ______   Data: ______
+============================================================
+
+NOTA CONV: i micro-benchmark conv (baseline_conv2d_*, baseline_depthwise_*) PASSAVANO
+già prima della presentazione. Non vengono ritestati su 4.0.1 (nessun motivo di regressione).
+
+NOTA TRANSFORMER singoli op: dense, layernorm, softmax, mha passavano tutti individualmente
+in 4.0.0 (confermato pre-presentazione). L'unico fallimento era il blocco completo.
+Non vengono ritestati individualmente.
+
+L'unico test da fare: il blocco transformer completo, con e senza --expand-softmax.
+
+--- TRANSFORMER BLOCK ---
+
+[ baseline_transformer_block_int8.onnx ]
+Generate Project
+Copying previous project files from C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-80 to C:\Users\matte\.stm32cubeaistudio\workspace\Baseline\.ai\run\run-80\.ai\generate\backup
+Calculating memory footprint...
+Run failed: Error: analyze error: INTERNAL ERROR: 'NoneType' object is not subscriptable. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+
+PASS:   0%|          | 0/103 [00:00<?, ?it/s]
+                                                      
+
+INTERNAL ERROR: 'NoneType' object is not subscriptable
+ 
+
+    RAM att (MB): ______   epoch (HW/SW/tot): ______   latenza (ms): ______
+    Cambiamento rispetto a 4.0.0: ______

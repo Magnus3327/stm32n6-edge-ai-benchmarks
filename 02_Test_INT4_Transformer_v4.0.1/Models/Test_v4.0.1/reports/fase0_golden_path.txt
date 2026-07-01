@@ -1,0 +1,10 @@
+FASE 0 — GOLDEN PATH — risultati pre-presentazione (4.0.0)
+============================================================
+
+NOTA: questi modelli passavano già prima della presentazione con AI Core 4.0.0-20500.
+Non è necessario ritestare: i risultati precedenti sono validi come baseline.
+Se vuoi un rapido controllo di regressione su 4.0.1, usali; ma non è obbligatorio.
+
+[ mobilenet_v2_224_int8.onnx   ] → PASSAVA in 4.0.0
+[ yolov11n_micro_224_int8.onnx ] → PASSAVA in 4.0.0
+[ yolov8n_micro_224_int8.onnx  ] → PASSAVA in 4.0.0

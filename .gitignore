@@ -45,7 +45,12 @@ st_ai_ws/
 **/Models/3_baseline/transformer/*.onnx
 **/Models/Test_v4.0.1/to_windows/**/*.onnx
 **/Models/Test_v4.0.1/to_windows/**/*.tflite
-tflite_native/*.tflite
+**/tflite_native/*.tflite
+
+# Safety net generico: qualunque .onnx/.tflite dentro Models/1_ram_fail, a qualunque
+# profondita' (copre anche file sciolti come i fix export es. *_nonms.onnx)
+**/Models/1_ram_fail/**/*.onnx
+**/Models/1_ram_fail/**/*.tflite
 
 # Pesi pre-addestrati scaricati (ultralytics, ecc.) — mai committare
 *.pt
