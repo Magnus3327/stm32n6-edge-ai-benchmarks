@@ -24,6 +24,9 @@ declare -a MODELS=(
   "pidnet_s_int8|$BASE/Models/1_ram_fail/int8/pidnet_s_int8.onnx"
   "rtmdet_l_int8|$BASE/Models/1_ram_fail/int8/rtmdet_l_int8.onnx"
   "rtmdet_l_int8_nonms|$BASE/Models/1_ram_fail/rtmdet_l_int8_nonms.onnx"
+  # FIX 2026-07-03: post-processing strippato (P7/P7-bis risolti)
+  "yolov7_int8_nohead|$BASE/Models/1_ram_fail/yolov7_int8_nohead.onnx"
+  "rtmdet_l_int8_rawhead|$BASE/Models/1_ram_fail/rtmdet_l_int8_rawhead.onnx"
   "yolov8n_int8|$BASE/Models/1_ram_fail/int8/yolov8n_int8.onnx"
   "yolov11n_int8|$BASE/Models/1_ram_fail/int8/yolov11n_int8.onnx"
   "yolov11s_int8|$BASE/Models/1_ram_fail/int8/yolov11s_int8.onnx"
@@ -36,6 +39,13 @@ declare -a MODELS=(
   "uniformer_small_tfl|$BASE/tflite_native/uniformer_small_int8.tflite"
   "uniformer_base_tfl|$BASE/tflite_native/uniformer_base_int8.tflite"
   "uniformer_small_qkvsplit_tfl|$BASE/tflite_native/uniformer_small_qkvsplit_int8.tflite"
+  # FIX 2026-07-03: export ST-friendly (QKV split + ManualLN + FrozenPos, P8/P10/P11 risolti)
+  "uniformer_small_stfriendly_tfl|$BASE/tflite_native/uniformer_small_stfriendly_int8.tflite"
+  "uniformer_base_stfriendly_tfl|$BASE/tflite_native/uniformer_base_stfriendly_int8.tflite"
+  "mobileclip_s0_stfriendly_tfl|$BASE/tflite_native/mobileclip_s0_image_stfriendly_int8.tflite"
+  "mobileclip_b_stfriendly_tfl|$BASE/tflite_native/mobileclip_b_image_stfriendly_int8.tflite"
+  "baseline_tf_block_plain_tfl|$BASE/tflite_native/baseline_tf_block_plain_int8.tflite"
+  "baseline_tf_block_stfriendly_tfl|$BASE/tflite_native/baseline_tf_block_stfriendly_int8.tflite"
   # Transformer ONNX (per documentare artefatti export vs nativo)
   "mobileclip_s0_img_onnx|$BASE/Models/Test_v4.0.1/to_windows/fase2_transformer/onnx_int8/mobileclip_s0_image_int8.onnx"
   "mobileclip_b_img_onnx|$BASE/Models/Test_v4.0.1/to_windows/fase2_transformer/onnx_int8/mobileclip_b_image_int8.onnx"

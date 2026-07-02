@@ -1,0 +1,147 @@
+baseline_tf_block	n6-allmems-O3	COMPILER	–	–	–	INTERNAL ERROR: 'NoneType' object is not subscriptable
+baseline_tf_block	n6-extflash	COMPILER	–	–	–	INTERNAL ERROR: 'NoneType' object is not subscriptable
+baseline_tf_block	n6-extram	COMPILER	–	–	–	INTERNAL ERROR: 'NoneType' object is not subscriptable
+baseline_tf_block	n6-noextmem	COMPILER	–	–	–	INTERNAL ERROR: 'NoneType' object is not subscriptable
+baseline_tf_block_plain_tfl	n6-allmems-O3	COMPILER	–	–	–	TOOL ERROR: Shape and shape map lengths must be the same: [1, 1, 1, 64] vs. (BATCH, CH)
+baseline_tf_block_plain_tfl	n6-extflash	COMPILER	–	–	–	TOOL ERROR: Shape and shape map lengths must be the same: [1, 1, 1, 64] vs. (BATCH, CH)
+baseline_tf_block_plain_tfl	n6-extram	COMPILER	–	–	–	TOOL ERROR: Shape and shape map lengths must be the same: [1, 1, 1, 64] vs. (BATCH, CH)
+baseline_tf_block_plain_tfl	n6-noextmem	COMPILER	–	–	–	TOOL ERROR: Shape and shape map lengths must be the same: [1, 1, 1, 64] vs. (BATCH, CH)
+baseline_tf_block_stfriendly_tfl	n6-allmems-O3	OK	–	–	–	–
+baseline_tf_block_stfriendly_tfl	n6-extflash	OK	–	–	–	–
+baseline_tf_block_stfriendly_tfl	n6-extram	OK	–	–	–	–
+baseline_tf_block_stfriendly_tfl	n6-noextmem	OK	–	–	–	–
+mobileclip_b_img_onnx	n6-allmems-O3	ARTIFACT	–	–	–	TOOL ERROR: list index out of range
+mobileclip_b_img_onnx	n6-extflash	ARTIFACT	–	–	–	TOOL ERROR: list index out of range
+mobileclip_b_img_onnx	n6-extram	ARTIFACT	–	–	–	TOOL ERROR: list index out of range
+mobileclip_b_img_onnx	n6-noextmem	ARTIFACT	–	–	–	TOOL ERROR: list index out of range
+mobileclip_b_img_tfl	n6-allmems-O3	LAYER	–	–	–	NOT IMPLEMENTED: Slice on more than 3 dimensions is not supported
+mobileclip_b_img_tfl	n6-extflash	LAYER	–	–	–	NOT IMPLEMENTED: Slice on more than 3 dimensions is not supported
+mobileclip_b_img_tfl	n6-extram	LAYER	–	–	–	NOT IMPLEMENTED: Slice on more than 3 dimensions is not supported
+mobileclip_b_img_tfl	n6-noextmem	LAYER	–	–	–	NOT IMPLEMENTED: Slice on more than 3 dimensions is not supported
+mobileclip_b_stfriendly_tfl	n6-allmems-O3	RAM_NOFIT	–	–	574061376	E103(CliRuntimeError): Error calling the Neural Art compiler
+mobileclip_b_stfriendly_tfl	n6-extflash	RAM_NOFIT	–	–	649572672	E103(CliRuntimeError): Error calling the Neural Art compiler
+mobileclip_b_stfriendly_tfl	n6-extram	RAM_NOFIT	–	–	729843008	E103(CliRuntimeError): Error calling the Neural Art compiler
+mobileclip_b_stfriendly_tfl	n6-noextmem	RAM_NOFIT	–	–	764054336	E103(CliRuntimeError): Error calling the Neural Art compiler
+mobileclip_s0_img_onnx	n6-allmems-O3	ARTIFACT	–	–	–	INTERNAL ERROR: Exported ONNX could be malformed since ONNX shape inference fails
+mobileclip_s0_img_onnx	n6-extflash	ARTIFACT	–	–	–	INTERNAL ERROR: Exported ONNX could be malformed since ONNX shape inference fails
+mobileclip_s0_img_onnx	n6-extram	ARTIFACT	–	–	–	INTERNAL ERROR: Exported ONNX could be malformed since ONNX shape inference fails
+mobileclip_s0_img_onnx	n6-noextmem	ARTIFACT	–	–	–	INTERNAL ERROR: Exported ONNX could be malformed since ONNX shape inference fails
+mobileclip_s0_img_tfl	n6-allmems-O3	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+mobileclip_s0_img_tfl	n6-extflash	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+mobileclip_s0_img_tfl	n6-extram	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+mobileclip_s0_img_tfl	n6-noextmem	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+mobileclip_s0_stfriendly_tfl	n6-allmems-O3	OK	int8(1x3x256x256)	2.52 MiB	–	–
+mobileclip_s0_stfriendly_tfl	n6-extflash	OK	int8(1x3x256x256)	2.52 MiB	–	–
+mobileclip_s0_stfriendly_tfl	n6-extram	OK	int8(1x3x256x256)	2.55 MiB	–	–
+mobileclip_s0_stfriendly_tfl	n6-noextmem	RAM_NOFIT	–	–	54095389	E103(CliRuntimeError): Error calling the Neural Art compiler
+pidnet_s_int8	n6-allmems-O1	OK	int8(1x3x1024x1024)	26.14 MiB	–	–
+pidnet_s_int8	n6-allmems-O2	OK	int8(1x3x1024x1024)	26.14 MiB	–	–
+pidnet_s_int8	n6-allmems-O3	OK	int8(1x3x1024x1024)	26.14 MiB	–	–
+pidnet_s_int8	n6-allmems-Oauto	OK	int8(1x3x1024x1024)	26.68 MiB	–	–
+pidnet_s_int8	n6-extflash	RAM_NOFIT	–	–	210763776	E103(CliRuntimeError): Error calling the Neural Art compiler
+pidnet_s_int8	n6-extram	OK	int8(1x3x1024x1024)	33.49 MiB	–	–
+pidnet_s_int8	n6-noextmem	RAM_NOFIT	–	–	283455253	E103(CliRuntimeError): Error calling the Neural Art compiler
+pidnet_s_int8	n6-nointmem	OK	int8(1x3x1024x1024)	28.00 MiB	–	–
+pidnet_s_int8	profile_O3	OK	int8(1x3x1024x1024)	26.14 MiB	–	–
+resnet34_int8	n6-allmems-O1	OK	int8(1x3x224x224)	5.36 MiB	–	–
+resnet34_int8	n6-allmems-O2	OK	int8(1x3x224x224)	5.36 MiB	–	–
+resnet34_int8	n6-allmems-O3	OK	int8(1x3x224x224)	5.36 MiB	–	–
+resnet34_int8	n6-extflash	RAM_NOFIT	–	–	4014080	E103(CliRuntimeError): Error calling the Neural Art compiler
+resnet34_int8	n6-extram	OK	int8(1x3x224x224)	26.17 MiB	–	–
+resnet34_int8	n6-noextmem	RAM_NOFIT	–	–	26511760	E103(CliRuntimeError): Error calling the Neural Art compiler
+resnet34_int8	n6-nointmem	OK	int8(1x3x224x224)	4.74 MiB	–	–
+resnet34_int8	profile_O3	OK	int8(1x3x224x224)	5.36 MiB	–	–
+rtmdet_l_int8	n6-allmems-O1	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8	n6-allmems-O2	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8	n6-allmems-O3	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8	n6-allmems-Oauto	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8	n6-extflash	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8	n6-extram	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8	n6-noextmem	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8	n6-nointmem	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8	profile_O3	ARTIFACT	–	–	–	NOT IMPLEMENTED: Unsupported layer types: NonMaxSuppression
+rtmdet_l_int8_rawhead	n6-allmems-O3	OK	int8(1x3x640x640)	14.52 MiB	–	–
+rtmdet_l_int8_rawhead	n6-extflash	RAM_NOFIT	–	–	128102400	E103(CliRuntimeError): Error calling the Neural Art compiler
+rtmdet_l_int8_rawhead	n6-extram	RAM_NOFIT	–	–	221002052	E103(CliRuntimeError): Error calling the Neural Art compiler
+rtmdet_l_int8_rawhead	n6-noextmem	RAM_NOFIT	–	–	254556474	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_base_onnx	n6-allmems-O3	RAM_NOFIT	–	–	31084544	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_base_onnx	n6-extflash	RAM_NOFIT	–	–	233238480	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_base_onnx	n6-extram	RAM_NOFIT	–	–	469450323	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_base_onnx	n6-noextmem	RAM_NOFIT	–	–	503004731	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_base_stfriendly_tfl	n6-allmems-O3	OK	int8(1x3x224x224)	4.20 MiB	–	–
+uniformer_base_stfriendly_tfl	n6-extflash	RAM_NOFIT	–	–	38760960	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_base_stfriendly_tfl	n6-extram	RAM_NOFIT	–	–	424825509	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_base_stfriendly_tfl	n6-noextmem	RAM_NOFIT	–	–	458379931	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_base_tfl	n6-allmems-O3	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+uniformer_base_tfl	n6-extflash	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+uniformer_base_tfl	n6-extram	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+uniformer_base_tfl	n6-noextmem	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+uniformer_small_onnx	n6-allmems-O3	OK	int8(1x3x224x224)	23.96 MiB	–	–
+uniformer_small_onnx	n6-extflash	RAM_NOFIT	–	–	114908896	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_small_onnx	n6-extram	RAM_NOFIT	–	–	17162240	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_small_onnx	n6-noextmem	RAM_NOFIT	–	–	225652916	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_small_qkvsplit_tfl	n6-allmems-O3	COMPILER	–	–	–	TOOL ERROR: Shape and shape map lengths must be the same: [1, 1, 1, 3136] vs. (BATCH, CH)
+uniformer_small_qkvsplit_tfl	n6-extflash	COMPILER	–	–	–	TOOL ERROR: Shape and shape map lengths must be the same: [1, 1, 1, 3136] vs. (BATCH, CH)
+uniformer_small_qkvsplit_tfl	n6-extram	COMPILER	–	–	–	TOOL ERROR: Shape and shape map lengths must be the same: [1, 1, 1, 3136] vs. (BATCH, CH)
+uniformer_small_qkvsplit_tfl	n6-noextmem	COMPILER	–	–	–	TOOL ERROR: Shape and shape map lengths must be the same: [1, 1, 1, 3136] vs. (BATCH, CH)
+uniformer_small_stfriendly_tfl	n6-allmems-O3	OK	int8(1x3x224x224)	4.20 MiB	–	–
+uniformer_small_stfriendly_tfl	n6-extflash	RAM_NOFIT	–	–	17110016	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_small_stfriendly_tfl	n6-extram	OK	int8(1x3x224x224)	33.92 MiB	–	–
+uniformer_small_stfriendly_tfl	n6-noextmem	RAM_NOFIT	–	–	208004491	E103(CliRuntimeError): Error calling the Neural Art compiler
+uniformer_small_tfl	n6-allmems-O3	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+uniformer_small_tfl	n6-extflash	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+uniformer_small_tfl	n6-extram	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+uniformer_small_tfl	n6-noextmem	LAYER	–	–	–	NOT IMPLEMENTED: Slice on batch dimension not supported
+yolov11l_int8	n6-allmems-O3	OK	int8(1x3x640x640)	15.98 MiB	–	–
+yolov11l_int8	n6-extflash	RAM_NOFIT	–	–	124108800	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11l_int8	n6-extram	RAM_NOFIT	–	–	27852800	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11l_int8	n6-noextmem	RAM_NOFIT	–	–	249102406	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11m_int8	n6-allmems-O1	OK	int8(1x3x640x640)	15.98 MiB	–	–
+yolov11m_int8	n6-allmems-O3	OK	int8(1x3x640x640)	15.98 MiB	–	–
+yolov11m_int8	n6-extflash	RAM_NOFIT	–	–	100736000	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11m_int8	n6-extram	RAM_NOFIT	–	–	819200	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11m_int8	n6-noextmem	RAM_NOFIT	–	–	189067874	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11m_int8	n6-nointmem	OK	int8(1x3x640x640)	14.06 MiB	–	–
+yolov11n_int8	n6-allmems-O1	OK	int8(1x3x640x640)	5.47 MiB	–	–
+yolov11n_int8	n6-allmems-O2	OK	int8(1x3x640x640)	5.47 MiB	–	–
+yolov11n_int8	n6-allmems-O3	OK	int8(1x3x640x640)	5.47 MiB	–	–
+yolov11n_int8	n6-allmems-Oauto	OK	int8(1x3x640x640)	5.47 MiB	–	–
+yolov11n_int8	n6-extflash	RAM_NOFIT	–	–	9856000	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11n_int8	n6-extram	OK	int8(1x3x640x640)	8.12 MiB	–	–
+yolov11n_int8	n6-noextmem	RAM_NOFIT	–	–	49862528	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11n_int8	n6-nointmem	COMPILER	–	–	–	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11n_int8	profile_O3	OK	int8(1x3x640x640)	5.47 MiB	–	–
+yolov11s_int8	n6-allmems-O1	OK	int8(1x3x640x640)	9.14 MiB	–	–
+yolov11s_int8	n6-allmems-O2	OK	int8(1x3x640x640)	9.14 MiB	–	–
+yolov11s_int8	n6-allmems-O3	OK	int8(1x3x640x640)	9.14 MiB	–	–
+yolov11s_int8	n6-extflash	RAM_NOFIT	–	–	37350400	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11s_int8	n6-extram	OK	int8(1x3x640x640)	18.34 MiB	–	–
+yolov11s_int8	n6-noextmem	RAM_NOFIT	–	–	97218429	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11s_int8	n6-nointmem	OK	int8(1x3x640x640)	6.95 MiB	–	–
+yolov11s_int8	profile_O3	OK	int8(1x3x640x640)	9.14 MiB	–	–
+yolov11x_int8	n6-allmems-O3	OK	int8(1x3x640x640)	23.13 MiB	–	–
+yolov11x_int8	n6-extflash	RAM_NOFIT	–	–	215296000	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11x_int8	n6-extram	RAM_NOFIT	–	–	357452782	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov11x_int8	n6-noextmem	RAM_NOFIT	–	–	391007208	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov7_int8	n6-allmems-O1	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8	n6-allmems-O2	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8	n6-allmems-O3	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8	n6-allmems-Oauto	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8	n6-extflash	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8	n6-extram	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8	n6-noextmem	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8	n6-nointmem	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8	profile_O3	LAYER	–	–	–	NOT IMPLEMENTED: ScatterND layer with data dimensions > 5 (with Batch) is not supported
+yolov7_int8_nohead	n6-allmems-O3	OK	int8(1x3x640x640)	21.45 MiB	–	–
+yolov7_int8_nohead	n6-extflash	RAM_NOFIT	–	–	119795200	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov7_int8_nohead	n6-extram	RAM_NOFIT	–	–	177677933	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov7_int8_nohead	n6-noextmem	RAM_NOFIT	–	–	212051551	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov8n_int8	n6-allmems-O1	OK	int8(1x3x640x640)	3.91 MiB	–	–
+yolov8n_int8	n6-allmems-O2	OK	int8(1x3x640x640)	3.91 MiB	–	–
+yolov8n_int8	n6-allmems-O3	OK	int8(1x3x640x640)	3.91 MiB	–	–
+yolov8n_int8	n6-allmems-Oauto	COMPILER	–	–	–	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov8n_int8	n6-extflash	RAM_NOFIT	–	–	5939200	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov8n_int8	n6-extram	OK	int8(1x3x640x640)	7.03 MiB	–	–
+yolov8n_int8	n6-noextmem	RAM_NOFIT	–	–	46255319	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov8n_int8	n6-nointmem	COMPILER	–	–	–	E103(CliRuntimeError): Error calling the Neural Art compiler
+yolov8n_int8	profile_O3	OK	int8(1x3x640x640)	3.91 MiB	–	–
